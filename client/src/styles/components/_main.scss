@@ -1,0 +1,64 @@
+@use "../utils/colors";
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: colors.$secondary;
+  color: colors.$main;
+}
+h1 {
+  font-size: calc(100% + 1.8vw + 1.8vh);
+}
+h2 {
+  font-size: calc(100% + 2.5vw + 2.5vh);
+  position: relative;
+  span {
+    position: absolute;
+    top: -1.3em;
+    left: -0.3em;
+    font-size: calc(100% + 2.8vw + 2.8vh);
+    color: #00000011;
+  }
+}
+p {
+  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-weight: 300;
+  span {
+    font-weight: 500;
+    color: colors.$accent;
+  }
+  a,
+  link {
+    color: colors.$accent;
+    text-decoration: none;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+  }
+  a:hover,
+  a:active,
+  a:focus,
+  link:hover,
+  link:active,
+  link:focus {
+    padding: 0.2em 0.5em;
+    box-shadow: inset 10em 0 0 0 colors.$main;
+    border-radius: 0.25em;
+    color: colors.$secondary;
+  }
+}
+button {
+  background-color: colors.$main;
+  color: colors.$secondary;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 1em;
+  font-size: calc(100% + 0.4vw + 0.4vh);
+  transition: all 0.2s ease-in-out;
+}
+button:hover,
+button:active {
+  background-color: #232323f4;
+  color: #fff;
+}
