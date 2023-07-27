@@ -2,11 +2,13 @@ import React from "react";
 
 function Header() {
   return (
-    <div>
+    <header className="position-fixed top-0">
       V.01 - Routing
       <br />
       V.02 - Google Login
-    </div>
+      <br />
+      V.03 - Started to Styling
+    </header>
   );
 }
 
