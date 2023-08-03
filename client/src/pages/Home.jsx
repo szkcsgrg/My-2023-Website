@@ -1,19 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
     <article>
-      <secion className="landing row d-flex justify-content-center flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
+      <section className="landing row d-flex justify-content-center flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
         <div className="col-12 col-md-10 col-lg-8">
           <h1>Gergő Szakács</h1>
           <p>
-            A passionate <span>Developer</span> and <span>Photographer</span>{" "}
-            from Hungary. <br />
+            A passionate <Link to="/development">Developer</Link> and{" "}
+            <Link to="/photography">Photographer</Link> from Hungary. <br />
           </p>
         </div>
-      </secion>
+      </section>
       <section className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
-        <h2>Sofware Development</h2>
+        <h2>
+          <Link to="/development">Sofware Development</Link>
+        </h2>
         <h2 className="d-none d-lg-block">
           <span>Sofware Development</span>
         </h2>
@@ -29,7 +32,9 @@ function Home() {
         </p>
       </section>
       <section className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
-        <h2>Photography</h2>
+        <h2>
+          <Link to="/photography">Photography</Link>
+        </h2>
         <h2 className="d-none d-lg-block">
           <span>Photography</span>
         </h2>

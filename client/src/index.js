@@ -4,6 +4,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 import "./styles/index.css";
 
+import Cursor from "./components/cursor";
 import Header from "./pages/components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -14,6 +15,7 @@ const Layout = () => {
   return (
     <>
       <Header />
+      <Cursor />
       <Outlet />
     </>
   );

@@ -8,6 +8,10 @@ function Header() {
       V.02 - Google Login
       <br />
       V.03 - Started to Styling
+      <br />
+      V.04 - Fixed env file :)
+      <br />
+      V.05 - Cursor
     </header>
   );
 }

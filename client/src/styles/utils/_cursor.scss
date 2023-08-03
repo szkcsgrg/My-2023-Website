@@ -1,0 +1,13 @@
+@use "colors";
+
+.cursor {
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: colors.$accent;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
