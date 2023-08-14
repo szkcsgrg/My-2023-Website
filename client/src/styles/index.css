@@ -1,15 +1,3 @@
-.cursor {
-  transition-duration: 0.3s;
-  transition-timing-function: ease-out;
-  top: 0;
-  left: 0;
-  position: fixed;
-  background: #d7942d;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-}
-
 html,
 body {
   height: 100%;
@@ -81,6 +69,55 @@ p link:focus {
   color: #f3f3f3;
 }
 
+.simple-link {
+  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-weight: 300;
+}
+.simple-link a,
+.simple-link link {
+  color: #232323;
+  text-decoration: none;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.simple-link a:hover,
+.simple-link a:active,
+.simple-link a:focus,
+.simple-link link:hover,
+.simple-link link:active,
+.simple-link link:focus {
+  padding: 0;
+  font-weight: 300;
+  color: #232323;
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+.no-effect-link {
+  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-weight: 300;
+}
+.no-effect-link a,
+.no-effect-link link {
+  color: #232323;
+  text-decoration: none;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.no-effect-link a:hover,
+.no-effect-link a:active,
+.no-effect-link a:focus,
+.no-effect-link link:hover,
+.no-effect-link link:active,
+.no-effect-link link:focus {
+  padding: 0;
+  font-weight: 300;
+  color: #232323;
+  box-shadow: none;
+}
+
 button {
   background-color: #232323;
   color: #f3f3f3;
@@ -100,11 +137,22 @@ button:active {
 .landing {
   height: 100svh;
   position: relative;
-  overflow: hidden;
 }
 
 .section {
   height: 80svh;
   position: relative;
-  overflow: hidden;
+}
+
+.cursor {
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: #d7942d;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  pointer-events: none;
 }

@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { developmentEnter, developmentExit } from "../components/cursor";
+import { motion } from "framer-motion";
 
 function Home() {
   return (
     <article>
-      <section className="landing row d-flex justify-content-center flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="landing row d-flex justify-content-center flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+      >
         <div className="col-12 col-md-10 col-lg-8">
           <h1>Gergő Szakács</h1>
           <p>
@@ -12,9 +19,14 @@ function Home() {
             <Link to="/photography">Photographer</Link> from Hungary. <br />
           </p>
         </div>
-      </section>
-      <section className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
-        <h2>
+      </motion.section>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+      >
+        <h2 onMouseEnter={developmentEnter} onMouseLeave={developmentExit}>
           <Link to="/development">Sofware Development</Link>
         </h2>
         <h2 className="d-none d-lg-block">
@@ -30,8 +42,13 @@ function Home() {
           into learning React and Node with Express. I also tried Firebase and
           some Database solutions such as MySQL and MongoDB.
         </p>
-      </section>
-      <section className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">
+      </motion.section>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+      >
         <h2>
           <Link to="/photography">Photography</Link>
         </h2>
@@ -50,7 +67,7 @@ function Home() {
           objects or people, I love to take a digital version of the moment.
           Street photography and nature puts me in my comfort zone.
         </p>
-      </section>
+      </motion.section>
     </article>
   );
 }

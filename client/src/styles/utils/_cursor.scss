@@ -1,7 +1,7 @@
 @use "colors";
 
 .cursor {
-  transition-duration: 0.3s;
+  transition-duration: 0.2s;
   transition-timing-function: ease-out;
   top: 0;
   left: 0;
@@ -10,4 +10,5 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
+  pointer-events: none;
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../components/firebase";
+import { motion } from "framer-motion";
 
 import Dashboard from "../pages/Dashboard";
 
@@ -18,11 +19,16 @@ function Login() {
       setUserName(result.user.displayName);
       setUserEmail(result.user.email);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
   return (
-    <section className="landing row d-flex justify-content-center flex-column align-items-center">
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1.5 }}
+      className="landing row d-flex justify-content-center flex-column align-items-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+    >
       {!userName ? (
         <div className="col-8 text-center">
           <h1>Please leave this site!</h1>
@@ -48,7 +54,7 @@ function Login() {
           </p>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 }
 
