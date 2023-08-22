@@ -26,10 +26,14 @@ function Home() {
         transition={{ duration: 1.5 }}
         className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2 onMouseEnter={developmentEnter} onMouseLeave={developmentExit}>
+        <h2
+          className="z-1"
+          onMouseEnter={developmentEnter}
+          onMouseLeave={developmentExit}
+        >
           <Link to="/development">Sofware Development</Link>
         </h2>
-        <h2 className="d-none d-lg-block">
+        <h2 className="d-none d-lg-block z-0">
           <span>Sofware Development</span>
         </h2>
         <p>

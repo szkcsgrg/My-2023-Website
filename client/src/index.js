@@ -1,8 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { useEffect } from "react";
+// import { useLocation } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 
 import "./styles/index.css";
+import { developmentEnter, developmentExit } from "../src/components/cursor";
 
 import Cursor from "./components/cursor";
 import Header from "./pages/components/Header";
@@ -12,6 +20,12 @@ import Photography from "./pages/Photography";
 import Development from "./pages/Development";
 
 const Layout = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    developmentExit();
+  }, [pathname]);
   return (
     <>
       <Header />

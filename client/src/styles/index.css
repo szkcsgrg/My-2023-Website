@@ -31,8 +31,6 @@ h2 span {
   left: -0.3em;
   font-size: calc(100% + 2.8vw + 2.8vh);
   color: rgba(0, 0, 0, 0.0666666667);
-  z-index: -1;
-  cursor: move;
 }
 h2 Link,
 h2 a {
