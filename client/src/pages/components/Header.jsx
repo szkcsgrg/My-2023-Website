@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="z-3 top-0 position-fixed d-flex flex-row row w-100">
+    <header className="z-3 my-2 top-0 position-fixed d-flex flex-row row w-100">
       <div className="d-flex flex-row col-6 px-4">
         <p className="no-effect-link">
           <Link to="/">Gergő Szakács</Link>
