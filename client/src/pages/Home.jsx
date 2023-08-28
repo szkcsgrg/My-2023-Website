@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { developmentEnter, developmentExit } from "../components/cursor";
 import { motion } from "framer-motion";
+import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
 
 function Home() {
   return (
@@ -17,6 +18,16 @@ function Home() {
           <p>
             A passionate <Link to="/development">Developer</Link> and{" "}
             <Link to="/photography">Photographer</Link> from Hungary. <br />
+          </p>
+          <p className="simple-link">
+            Feel free to reach out at{" "}
+            <Link to="mailto:szkcsgrg@gmail.com">info@szakacsgergo.com</Link> or{" "}
+            <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
+            For a comprehensive look, feel free to access my{" "}
+            <a target="_blank" href={pdf}>
+              CV
+            </a>{" "}
+            for more details.
           </p>
         </div>
       </motion.section>
@@ -53,10 +64,10 @@ function Home() {
         transition={{ duration: 1.5 }}
         className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2>
+        <h2 className="z-1">
           <Link to="/photography">Photography</Link>
         </h2>
-        <h2 className="d-none d-lg-block">
+        <h2 className="d-none d-lg-block z-0">
           <span>Photography</span>
         </h2>
         <p>

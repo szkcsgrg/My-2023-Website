@@ -1,0 +1,35 @@
+@use "../utils/colors";
+.landing {
+  height: 100svh;
+  position: relative;
+}
+.section {
+  height: 80svh;
+  position: relative;
+}
+.section-longer {
+  height: auto;
+  position: relative;
+}
+.section-shorter {
+  background-color: colors.$main;
+  color: colors.$secondary;
+  min-height: 60svh;
+  position: relative;
+}
+.project {
+  height: auto;
+  min-height: 80svh;
+  position: relative;
+  text-decoration: none;
+  color: colors.$main;
+  cursor: pointer;
+}
+.project-thumbnail {
+  -webkit-box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  border-radius: 0;
+  max-height: 80svh;
+}

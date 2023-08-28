@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import TestImage from "../assets/utils/test.jpeg";
 
-let developmentEnter, developmentExit;
+let developmentEnter, developmentExit, darkEnter, darkExit;
 
 function Cursor() {
-  const [cursorVariant, setCursorVariant] = useState("default");
+  const [cursorVariant, setCursorVariant] = useState("");
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
@@ -30,6 +30,7 @@ function Cursor() {
     default: {
       x: mousePosition.x - 8,
       y: mousePosition.y - 8,
+      backgroundColor: "#d7942d",
     },
     development: {
       height: 250,
@@ -40,19 +41,26 @@ function Cursor() {
       backgroundImage: `url(${TestImage})`,
       transition: { duration: 0.5 },
     },
+    dark: {
+      x: mousePosition.x - 8,
+      y: mousePosition.y - 8,
+      backgroundColor: "#f3f3f3",
+    },
   };
 
   developmentEnter = () => setCursorVariant("development");
   developmentExit = () => setCursorVariant("default");
+  darkEnter = () => setCursorVariant("dark");
+  darkExit = () => setCursorVariant("default");
 
   return (
     <motion.div
       variants={variants}
       animate={cursorVariant}
-      className="cursor d-none d-lg-block"
+      className="cursor z-1 d-none d-lg-block"
     />
   );
 }
 
-export { developmentEnter, developmentExit };
+export { developmentEnter, developmentExit, darkEnter, darkExit };
 export default Cursor;

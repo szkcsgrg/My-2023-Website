@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
 import {
   createBrowserRouter,
   Outlet,
@@ -10,14 +9,18 @@ import {
 } from "react-router-dom";
 
 import "./styles/index.css";
-import { developmentEnter, developmentExit } from "../src/components/cursor";
+import { developmentExit } from "../src/components/cursor";
 
 import Cursor from "./components/cursor";
+import ErrorPage from "./components/error-page";
 import Header from "./pages/components/Header";
+import DevelopmentHeader from "./pages/components/DevelopmentHeader";
+import PhotographyHeader from "./pages/components/PhotographyHeader";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Photography from "./pages/Photography";
 import Development from "./pages/Development";
+import Project from "./pages/components/Project";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -26,6 +29,24 @@ const Layout = () => {
     window.scrollTo(0, 0);
     developmentExit();
   }, [pathname]);
+  if (pathname === "/development") {
+    return (
+      <>
+        <DevelopmentHeader />
+        <Cursor />
+        <Outlet />
+      </>
+    );
+  }
+  if (pathname === "/photography") {
+    return (
+      <>
+        <PhotographyHeader />
+        <Cursor />
+        <Outlet />
+      </>
+    );
+  }
   return (
     <>
       <Header />
@@ -37,6 +58,7 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
+    errorElement: <ErrorPage />,
     path: "/",
     element: <Layout />,
     children: [
@@ -44,6 +66,14 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/photography", element: <Photography /> },
       { path: "/development", element: <Development /> },
+      { path: "/projects/:id", element: <Project /> }, //project/1
+      /*
+       * IMPORTANT NOTE
+       * Get Values
+       * Create new path, based on database records.
+       * Import Values to the path component.
+       * Process: get Values from DB, then create new path. Open project component pass the values with the correct values.
+       */
     ],
   },
 ]);

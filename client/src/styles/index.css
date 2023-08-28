@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 html,
 body {
   font-family: "Roboto", sans-serif;
@@ -6,6 +6,16 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f3f3f3;
+  color: #232323;
+}
+
+.dark ::-moz-selection {
+  background: #f3f3f3;
+  color: #232323;
+}
+
+.dark ::selection {
+  background: #f3f3f3;
   color: #232323;
 }
 
@@ -20,13 +30,13 @@ body {
 }
 
 h1 {
-  font-family: "Kanit", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: calc(100% + 1.8vw + 1.8vh);
 }
 
 h2 {
-  font-family: "Kanit", sans-serif;
-  font-size: calc(100% + 2.5vw + 2.5vh);
+  font-family: "Raleway", sans-serif;
+  font-size: calc(100% + 2.4vw + 2.4vh);
   position: relative;
 }
 h2 span {
@@ -34,7 +44,7 @@ h2 span {
   position: absolute;
   top: -1.3em;
   left: -0.3em;
-  font-size: calc(100% + 2.7vw + 2.7vh);
+  font-size: calc(100% + 2.5vw + 2.5vh);
   color: rgba(0, 0, 0, 0.0666666667);
 }
 h2 Link,
@@ -45,8 +55,16 @@ h2 a {
 }
 
 h3 {
-  font-family: "Kanit", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: calc(100% + 1.5vw + 1.5vh);
+}
+h3 span {
+  color: #d7942d;
+  font-weight: medium;
+}
+
+h4 {
+  font-weight: 400;
 }
 
 header p {
@@ -54,12 +72,15 @@ header p {
 }
 
 p {
-  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-size: calc(100% + 0.3vw + 0.3vh);
   font-weight: 300;
+  margin: 0;
+  padding: 0;
 }
 p span {
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
-  color: #d7942d;
+  color: rgba(35, 35, 35, 0.3137254902);
   margin: 0;
   padding: 0;
 }
@@ -70,6 +91,8 @@ p link {
   font-weight: 400;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
+  position: relative;
+  padding: 0.2em 0;
 }
 p a:hover,
 p a:active,
@@ -77,10 +100,7 @@ p a:focus,
 p link:hover,
 p link:active,
 p link:focus {
-  padding: 0.2em 0.5em 0.3em 0.5em;
-  box-shadow: inset 10em 0 0 0 #232323;
-  border-radius: 0.25em;
-  color: #f3f3f3;
+  color: #232323;
 }
 
 span {
@@ -97,18 +117,28 @@ span {
   color: #d7942d;
 }
 
+.margin-top-075 {
+  margin-top: 0.75em !important;
+}
+
+.smaller-span {
+  font-size: calc(100% + 0.002vw + 0.002vh);
+  font-weight: 400;
+  color: rgba(35, 35, 35, 0.3137254902);
+}
+
 .smaller-text {
-  margin-top: 0.75em;
   font-size: calc(100% + 0.25vw + 0.25vh);
   font-weight: 300;
 }
 .smaller-text span {
-  font-weight: 500;
+  font-weight: 300;
   color: #d7942d;
 }
 .smaller-text a,
 .smaller-text link {
   text-decoration: none;
+  font-weight: 300;
   color: #d7942d;
   padding: 0;
   box-shadow: none;
@@ -128,7 +158,7 @@ span {
 }
 
 .simple-link {
-  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-size: calc(100% + 0.2vw + 0.2vh);
   font-weight: 300;
 }
 .simple-link a,
@@ -176,6 +206,10 @@ span {
   box-shadow: none;
 }
 
+.logo {
+  font-size: calc(100% + 0.2vw + 0.2vh);
+}
+
 button {
   background-color: #232323;
   color: #f3f3f3;
@@ -190,6 +224,10 @@ button:hover,
 button:active {
   background-color: rgba(35, 35, 35, 0.9568627451);
   color: #fff;
+}
+
+.m-b-1 {
+  margin-bottom: 1em;
 }
 
 .landing {
@@ -207,9 +245,27 @@ button:active {
   position: relative;
 }
 
-.section-half {
-  height: 40svh;
+.section-shorter {
+  background-color: #232323;
+  color: #f3f3f3;
+  min-height: 60svh;
   position: relative;
+}
+
+.project {
+  height: auto;
+  min-height: 80svh;
+  position: relative;
+  text-decoration: none;
+  color: #232323;
+  cursor: pointer;
+}
+
+.project-thumbnail {
+  box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  border-radius: 0;
+  max-height: 80svh;
 }
 
 .cursor {
@@ -218,7 +274,6 @@ button:active {
   top: 0;
   left: 0;
   position: fixed;
-  background: #d7942d;
   width: 16px;
   height: 16px;
   border-radius: 50%;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function PhotographyHeader() {
   return (
     <header className="z-3 my-2 top-0 position-fixed d-flex flex-row row w-100">
       <div className="d-flex flex-row col-6 px-3 px-lg-4">
@@ -13,12 +13,9 @@ function Header() {
         <p className="simple-link">
           <Link to="/development">Development</Link>
         </p>
-        <p className="simple-link">
-          <Link to="/photography">Photography</Link>
-        </p>
       </div>
     </header>
   );
 }
 
-export default Header;
+export default PhotographyHeader;
