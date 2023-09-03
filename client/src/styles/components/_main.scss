@@ -195,8 +195,13 @@ button {
   border: none;
   border-radius: 0.5em;
   padding: 0.5em 1em;
-  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-size: calc(100% + 0.02vw + 0.02vh);
   transition: all 0.2s ease-in-out;
+  Link,
+  a {
+    text-decoration: none;
+    color: colors.$secondary;
+  }
 }
 button:hover,
 button:active {
@@ -205,4 +210,19 @@ button:active {
 }
 .m-b-1 {
   margin-bottom: 1em;
+}
+
+thead {
+  border-bottom: 3px solid colors.$accent;
+}
+
+input {
+  border: none;
+  background-color: colors.$secondary;
+  border-bottom: 1px solid colors.$main;
+}
+textarea {
+  border: none;
+  background-color: colors.$secondary;
+  border-bottom: 1px solid colors.$main;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import TestImage from "../assets/utils/test.jpeg";
+import TestImage from "../assets/utils/test.webp";
 
 let developmentEnter, developmentExit, darkEnter, darkExit;
 
@@ -33,11 +33,11 @@ function Cursor() {
       backgroundColor: "#d7942d",
     },
     development: {
-      height: 250,
-      width: 250,
-      x: mousePosition.x - 125,
-      y: mousePosition.y - 125,
-      opacity: 0.75,
+      height: 16,
+      width: 16,
+      x: mousePosition.x - 8,
+      y: mousePosition.y - 8,
+      opacity: 0.5,
       backgroundImage: `url(${TestImage})`,
       transition: { duration: 0.5 },
     },
@@ -45,6 +45,7 @@ function Cursor() {
       x: mousePosition.x - 8,
       y: mousePosition.y - 8,
       backgroundColor: "#f3f3f3",
+      cursor: "move",
     },
   };
 
@@ -53,12 +54,17 @@ function Cursor() {
   darkEnter = () => setCursorVariant("dark");
   darkExit = () => setCursorVariant("default");
 
+  // remove the d-none from the video tag when development enter.
   return (
     <motion.div
       variants={variants}
       animate={cursorVariant}
       className="cursor z-1 d-none d-lg-block"
-    />
+    >
+      <video className="d-none d-block" src="">
+        <source src="" />
+      </video>
+    </motion.div>
   );
 }
 

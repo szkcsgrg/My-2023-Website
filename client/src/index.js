@@ -21,6 +21,8 @@ import Login from "./pages/Login";
 import Photography from "./pages/Photography";
 import Development from "./pages/Development";
 import Project from "./pages/components/Project";
+import DeveloperAdd from "./pages/components/DeveloperAdd";
+import DeveloperEdit from "./pages/components/DeveloperEdit";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -66,7 +68,9 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/photography", element: <Photography /> },
       { path: "/development", element: <Development /> },
-      { path: "/projects/:id", element: <Project /> }, //project/1
+      { path: "/projects/:id", element: <Project /> },
+      { path: "/addDeveloperProject", element: <DeveloperAdd /> },
+      { path: "/editDeveloperProject", element: <DeveloperEdit /> },
       /*
        * IMPORTANT NOTE
        * Get Values

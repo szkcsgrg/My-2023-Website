@@ -4,17 +4,28 @@
   position: relative;
 }
 .section {
-  height: 80svh;
+  min-height: 80svh;
+  height: auto;
   position: relative;
+  text-decoration: none;
+  color: colors.$main;
 }
 .section-longer {
   height: auto;
   position: relative;
+  text-decoration: none;
+  color: colors.$main;
+  cursor: pointer;
 }
 .section-shorter {
   background-color: colors.$main;
   color: colors.$secondary;
-  min-height: 60svh;
+  min-height: calc(100% + 60svw + 60svh);
+  height: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   position: relative;
 }
 .project {
@@ -32,4 +43,14 @@
   padding: 0;
   border-radius: 0;
   max-height: 80svh;
+}
+.swiper {
+  --bs-gutter-x: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
+  .swiper-wrapper {
+    --bs-gutter-x: 1.5rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }

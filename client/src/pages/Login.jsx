@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../components/firebase";
 import { motion } from "framer-motion";
-
 import Dashboard from "../pages/Dashboard";
 
 function Login() {
@@ -22,6 +21,12 @@ function Login() {
       alert(error);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(userEmail));
+    console.log(localStorage);
+  }, [userName]);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}

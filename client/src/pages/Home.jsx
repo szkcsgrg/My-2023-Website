@@ -31,21 +31,18 @@ function Home() {
           </p>
         </div>
       </motion.section>
-      <motion.section
+      <Link
+        to="/development"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        onMouseEnter={developmentEnter}
+        onMouseLeave={developmentExit}
+        className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2
-          className="z-1"
-          onMouseEnter={developmentEnter}
-          onMouseLeave={developmentExit}
-        >
-          <Link to="/development">Sofware Development</Link>
-        </h2>
+        <h2 className="z-1">Software Development</h2>
         <h2 className="d-none d-lg-block z-0">
-          <span>Sofware Development</span>
+          <span>Software Development</span>
         </h2>
         <p>
           After learning the basics of Programming, I met with the lovely HTML
@@ -57,12 +54,12 @@ function Home() {
           into learning React and Node with Express. I also tried Firebase and
           some Database solutions such as MySQL and MongoDB.
         </p>
-      </motion.section>
+      </Link>
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="section row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">
           <Link to="/photography">Photography</Link>

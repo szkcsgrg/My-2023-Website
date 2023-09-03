@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectFade, Scrollbar, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/effect-fade";
+
 import { darkEnter, darkExit } from "../components/cursor";
+
 import testImage from "../assets/utils/Untitled.png";
 import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
 
 function Development() {
+  //Get all the rows from the database.
+  const [reviews, setReviews] = useState([]);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    //Async fucntion is needed to communicate with the backend.
+    const fecthAllReviews = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/reviews");
+        setReviews(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fecthAllProjects = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:8800/projectsdevelopment"
+        );
+        setProjects(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    //Call the function.
+    fecthAllReviews();
+    fecthAllProjects();
+  }, []);
+
   return (
     <>
       <motion.section
@@ -14,9 +52,9 @@ function Development() {
         transition={{ duration: 1.5 }}
         className="section row d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2 className="z-1">Sofware Development</h2>
+        <h2 className="z-1">Software Development</h2>
         <h2 className="d-none d-lg-block z-0">
-          <span>Sofware Development</span>
+          <span>Software Development</span>
         </h2>
       </motion.section>
       {/* Overview */}
@@ -27,13 +65,15 @@ function Development() {
         className="section-longer row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <div className="d-flex flex-column flex-lg-row gap-3">
-          <p className="col-lg-4">
+          <div className="col-lg-4">
             <h3>Short Overview</h3>
-            I'm a Junior website developer with a passion for crafting seamless
-            online experiences. <br />
-            My journey began with an oriented matura in Computer Science,
-            further solidified by a Certificate as a Software Developer
-          </p>
+            <p>
+              I'm a Junior website developer with a passion for crafting
+              seamless online experiences. <br />
+              My journey began with an oriented matura in Computer Science,
+              further solidified by a Certificate as a Software Developer
+            </p>
+          </div>
           <p className="col-lg-8 smaller-text margin-top-075">
             With an eye for design and a knack for problem-solving, I've
             embarked on diverse projects that bring imagination to life. You can
@@ -49,11 +89,13 @@ function Development() {
             facet of my development approach.
           </p>
         </div>
-
+        <br />
+        <br />
         <p>
           <span>From coding to creativity, I've got you covered.</span>
         </p>
-
+        <br />
+        <br />
         <p className="smaller-text">
           Currently seeking new opportunities, I'm excited to contribute my
           skills to your next project. <br /> Feel free to reach out at{" "}
@@ -66,7 +108,7 @@ function Development() {
           for more details.
         </p>
       </motion.section>
-      {/* Reveiews */}
+      {/* Reviews */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -75,22 +117,29 @@ function Development() {
         onMouseEnter={darkEnter}
         onMouseLeave={darkExit}
       >
-        <div className="row d-flex flex-column m-0 p-0 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
+        <div className="row m-0 p-0 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
           <h3>
             <span>Reviews</span>
           </h3>
-          <p>Somebodys name will be here</p>
-          <p className="smaller-text">
-            Swiper is going to be here. Data will be automatically loaded from
-            the database. <br /> Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Quam illo consequatur alias natus animi distinctio
-            cum deserunt numquam ipsum tenetur! <br />
-            <span>Fix the Cursor color change.</span>
-            {/*
-             * IMPORTANT NOTE
-             * FIX the cursor effect.
-             */}
-          </p>
+
+          <Swiper
+            modules={[Navigation, Scrollbar, A11y, EffectFade]}
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            loopPreventsSliding={false}
+            //onSwiper={(swiper) => console.log(swiper)}
+            //effect="fade"
+          >
+            {reviews.map((review) => (
+              <SwiperSlide key={review.id}>
+                <p>{review.writer}</p>
+                <q className="smaller-text">{review.quote}</q>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </motion.section>
       {/* Projects */}
@@ -116,35 +165,37 @@ function Development() {
            */}
 
           {/* Project 1 */}
-          <Link
-            className="project d-flex flex-column flex-md-row gap-5"
-            to="/projects/RandomProject"
-          >
-            <div className="col-12 col-md-5 offset-md-1 d-flex flex-column justify-content-center">
-              <div className="justify-content-end">
-                <h4>Project's Name</h4>
-                <p>
-                  <span className="smaller-span">
-                    HTML, CSS, SASS, Bootstrap, React
-                  </span>
-                  <br />
-                  <span className="smaller-span">2022.03.12-2023.01.01.</span>
-                  <br />
-                  <span className="smaller-span">Freelance</span>
-                </p>
+          {projects.map((project) => (
+            <Link
+              key={project.id}
+              className="project d-flex flex-column flex-md-row gap-5"
+              to="/projects/RandomProject"
+            >
+              <div className="col-12 col-md-5 offset-md-1 d-flex flex-column justify-content-center">
+                <div className="justify-content-end">
+                  <h4>{project.name}</h4>
+                  <p>
+                    <span className="smaller-span">{project.stack}</span>
+                    <br />
+                    <span className="smaller-span">{project.date}</span>
+                    <br />
+                    <span className="smaller-span">
+                      {project.developmentType}
+                    </span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="col-12 col-md-5 d-flex justify-content-end">
-              <img
-                className="img-thumbnail border-0 project-thumbnail"
-                src={testImage}
-                alt="Project Image should be here."
-              />
-            </div>
-          </Link>
-
-          {/* Project 2 */}
+              <div className="col-12 col-md-5 d-flex justify-content-end">
+                <img
+                  className="img-thumbnail border-0 project-thumbnail"
+                  src={project.image1}
+                  alt="Project Image should be here."
+                />
+              </div>
+            </Link>
+          ))}
           <Link
+            // key={project.id}
             className="project d-flex flex-column flex-md-row gap-5"
             to="/projects/RandomProject"
           >
@@ -156,7 +207,7 @@ function Development() {
               />
             </div>
             <div className="col-12 col-md-5 d-flex flex-column justify-content-center">
-              <h4>Project's Name</h4>
+              {/* <h4>{project.name}</h4> */}
               <p>
                 <span className="smaller-span">
                   HTML, CSS, SASS, Bootstrap, React

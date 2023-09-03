@@ -216,8 +216,13 @@ button {
   border: none;
   border-radius: 0.5em;
   padding: 0.5em 1em;
-  font-size: calc(100% + 0.4vw + 0.4vh);
+  font-size: calc(100% + 0.02vw + 0.02vh);
   transition: all 0.2s ease-in-out;
+}
+button Link,
+button a {
+  text-decoration: none;
+  color: #f3f3f3;
 }
 
 button:hover,
@@ -230,25 +235,52 @@ button:active {
   margin-bottom: 1em;
 }
 
+thead {
+  border-bottom: 3px solid #d7942d;
+}
+
+input {
+  border: none;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #232323;
+}
+
+textarea {
+  border: none;
+  background-color: #f3f3f3;
+  border-bottom: 1px solid #232323;
+}
+
 .landing {
   height: 100svh;
   position: relative;
 }
 
 .section {
-  height: 80svh;
+  min-height: 80svh;
+  height: auto;
   position: relative;
+  text-decoration: none;
+  color: #232323;
 }
 
 .section-longer {
   height: auto;
   position: relative;
+  text-decoration: none;
+  color: #232323;
+  cursor: pointer;
 }
 
 .section-shorter {
   background-color: #232323;
   color: #f3f3f3;
-  min-height: 60svh;
+  min-height: calc(100% + 60svw + 60svh);
+  height: auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
   position: relative;
 }
 
@@ -266,6 +298,17 @@ button:active {
   padding: 0;
   border-radius: 0;
   max-height: 80svh;
+}
+
+.swiper {
+  --bs-gutter-x: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+.swiper .swiper-wrapper {
+  --bs-gutter-x: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .cursor {
