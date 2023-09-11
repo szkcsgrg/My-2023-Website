@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { developmentEnter, developmentExit } from "../components/cursor";
 import { motion } from "framer-motion";
 import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
+import profile from "../assets/utils/Profile.png";
 
 function Home() {
   return (
@@ -11,9 +12,12 @@ function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="landing row d-flex justify-content-center flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="landing d-flex justify-content-center align-items-center flex-row flex-lg-row-reverse m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <div className="col-12 col-md-10 col-lg-8">
+        <div className="col-12 col-md-10 col-lg-5">
+          <img className="profile-img" src={profile} alt="" />
+        </div>
+        <div className="col-12 col-md-10 col-lg-7">
           <h1>Gergő Szakács</h1>
           <p>
             A passionate <Link to="/development">Developer</Link> and{" "}

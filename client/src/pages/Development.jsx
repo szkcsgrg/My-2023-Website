@@ -169,7 +169,7 @@ function Development() {
             <Link
               key={project.id}
               className="project d-flex flex-column flex-md-row gap-5"
-              to="/projects/RandomProject"
+              to={`/project/${project.id}`}
             >
               <div className="col-12 col-md-5 offset-md-1 d-flex flex-column justify-content-center">
                 <div className="justify-content-end">
@@ -177,7 +177,9 @@ function Development() {
                   <p>
                     <span className="smaller-span">{project.stack}</span>
                     <br />
-                    <span className="smaller-span">{project.date}</span>
+                    <span className="smaller-span">
+                      {project.dateStart}-{project.dateEnd}
+                    </span>
                     <br />
                     <span className="smaller-span">
                       {project.developmentType}

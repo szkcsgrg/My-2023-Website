@@ -19,10 +19,10 @@ function DeveloperAdd() {
     stack: "",
     description1: "",
     description2: "",
-    image1: "",
-    image2: "",
-    image3: "",
-    image4: "",
+    image1: null,
+    image2: null,
+    image3: null,
+    image4: null,
     colorCode: "",
     href1: "",
     href2: "",
@@ -31,7 +31,12 @@ function DeveloperAdd() {
     dateEnd: "",
   });
   const handleChange = (e) => {
-    setProjects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (e.target.type === "file") {
+      // Handle file inputs differently
+      setProjects((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
+    } else {
+      setProjects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
   const handleClick = async (e) => {
     e.preventDefault();
@@ -43,6 +48,8 @@ function DeveloperAdd() {
         projects.stack === "" ||
         projects.image1 === "" ||
         projects.image2 === "" ||
+        projects.image3 === "" ||
+        projects.image4 === "" ||
         projects.description1 === "" ||
         projects.description2 === "" ||
         projects.colorCode === "" ||
@@ -52,11 +59,40 @@ function DeveloperAdd() {
       ) {
         alert("Please fill all fields");
       } else {
-        await axios.post("http://localhost:8800/developerprojects", projects);
-        navigate("/login");
+        const formData = new FormData();
+        formData.append("name", projects.name);
+        formData.append("dateStart", projects.dateStart);
+        formData.append("stack", projects.stack);
+        formData.append("description1", projects.description1);
+        formData.append("description2", projects.description2);
+        formData.append("colorCode", projects.colorCode);
+        formData.append("href1", projects.href1);
+        formData.append("href2", projects.href2);
+        formData.append("developmentType", projects.developmentType);
+        formData.append("position", projects.position);
+        formData.append("dateEnd", projects.dateEnd);
+
+        // Append selected image files
+        formData.append("image1", projects.image1);
+        formData.append("image2", projects.image2);
+        formData.append("image3", projects.image3);
+        formData.append("image4", projects.image4);
+
+        console.log(formData, projects);
+        const response = await axios.post(
+          "http://localhost:8800/developerprojects",
+          formData
+        );
+
+        if (response.status === 200) {
+          console.log("Project has been created successfully.");
+          navigate("/login");
+        } else {
+          console.error("Project creation failed.");
+        }
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
 
@@ -125,25 +161,29 @@ function DeveloperAdd() {
                   placeholder="Href 2"
                 />
                 <input
-                  type="text"
+                  type="file"
+                  accept="image/*"
                   onChange={handleChange}
                   name="image1"
                   placeholder="Image 1"
                 />
                 <input
-                  type="text"
+                  type="file"
+                  accept="image/*"
                   onChange={handleChange}
                   name="image2"
                   placeholder="Image 2"
                 />
                 <input
-                  type="text"
+                  type="file"
+                  accept="image/*"
                   onChange={handleChange}
                   name="image3"
                   placeholder="Image 3"
                 />
                 <input
-                  type="text"
+                  type="file"
+                  accept="image/*"
                   onChange={handleChange}
                   name="image4"
                   placeholder="Image 4"

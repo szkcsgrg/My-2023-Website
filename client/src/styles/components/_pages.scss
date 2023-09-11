@@ -54,3 +54,20 @@
     margin-right: 0;
   }
 }
+.parallax {
+  height: auto;
+  min-height: 80svh;
+  position: relative;
+}
+.profile-img {
+  max-width: 100%;
+  position: relative;
+}
+@media (min-width: 1200px) {
+  .profile-img {
+    position: absolute;
+    left: 35%;
+    top: -5em;
+    width: 75%;
+  }
+}

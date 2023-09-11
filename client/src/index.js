@@ -68,9 +68,10 @@ const router = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/photography", element: <Photography /> },
       { path: "/development", element: <Development /> },
-      { path: "/projects/:id", element: <Project /> },
+      { path: "/project/:id", element: <Project /> },
       { path: "/addDeveloperProject", element: <DeveloperAdd /> },
-      { path: "/editDeveloperProject", element: <DeveloperEdit /> },
+      { path: "/updateDeveloperProject/:id", element: <DeveloperEdit /> },
+
       /*
        * IMPORTANT NOTE
        * Get Values

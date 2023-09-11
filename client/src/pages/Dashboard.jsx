@@ -71,7 +71,9 @@ function Dashboard() {
                 <td>{project.href2}</td>
                 <td id="functions">
                   <button className="m">
-                    <Link to={`/update/${project.id}`}>Update</Link>
+                    <Link to={`/updateDeveloperProject/${project.id}`}>
+                      Update
+                    </Link>
                   </button>
                   {/* <button
                     className="m"
