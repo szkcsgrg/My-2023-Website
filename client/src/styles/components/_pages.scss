@@ -1,14 +1,16 @@
 @use "../utils/colors";
 .landing {
-  height: 100svh;
+  min-height: 80svh;
   position: relative;
 }
 .section {
-  min-height: 80svh;
+  min-height: 35svh;
   height: auto;
   position: relative;
   text-decoration: none;
   color: colors.$main;
+  padding: 0;
+  margin: 0;
 }
 .section-longer {
   height: auto;
@@ -60,14 +62,6 @@
   position: relative;
 }
 .profile-img {
-  max-width: 100%;
+  width: 100%;
   position: relative;
-}
-@media (min-width: 1200px) {
-  .profile-img {
-    position: absolute;
-    left: 35%;
-    top: -5em;
-    width: 75%;
-  }
 }

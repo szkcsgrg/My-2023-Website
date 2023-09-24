@@ -12,12 +12,22 @@ function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="landing d-flex justify-content-center align-items-center flex-row flex-lg-row-reverse m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="landing d-flex justify-content-center align-items-center flex-column flex-lg-row-reverse m-1 p-1 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <div className="col-12 col-md-10 col-lg-5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="col-12 col-lg-7"
+        >
           <img className="profile-img" src={profile} alt="" />
-        </div>
-        <div className="col-12 col-md-10 col-lg-7">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5 }}
+          className="col-12 col-lg-5"
+        >
           <h1>Gergő Szakács</h1>
           <p>
             A passionate <Link to="/development">Developer</Link> and{" "}
@@ -33,18 +43,19 @@ function Home() {
             </a>{" "}
             for more details.
           </p>
-        </div>
+        </motion.div>
       </motion.section>
       <Link
         to="/development"
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 0, x: "100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 2.5 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        onMouseEnter={developmentEnter}
-        onMouseLeave={developmentExit}
+        // onMouseEnter={developmentEnter}
+        // onMouseLeave={developmentExit}
         className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2 className="z-1">Software Development</h2>
+        <h2 className="z-1 m-0">Software Development</h2>
         <h2 className="d-none d-lg-block z-0">
           <span>Software Development</span>
         </h2>
@@ -60,9 +71,10 @@ function Home() {
         </p>
       </Link>
       <motion.section
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 0, x: "-100%" }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 2.5 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
         className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">

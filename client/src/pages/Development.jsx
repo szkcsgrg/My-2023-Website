@@ -130,13 +130,15 @@ function Development() {
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             loopPreventsSliding={false}
-            //onSwiper={(swiper) => console.log(swiper)}
-            //effect="fade"
           >
+            {/*
+             *IMPORTANT NOTE
+             * Ha Project.reviewWriter is not undefined or "" show.
+             */}
             {reviews.map((review) => (
               <SwiperSlide key={review.id}>
-                <p>{review.writer}</p>
-                <q className="smaller-text">{review.quote}</q>
+                <p>{review.reviewWriter}</p>
+                <q className="smaller-text">{review.reviewText}</q>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -197,7 +199,6 @@ function Development() {
             </Link>
           ))}
           <Link
-            // key={project.id}
             className="project d-flex flex-column flex-md-row gap-5"
             to="/projects/RandomProject"
           >
@@ -209,7 +210,6 @@ function Development() {
               />
             </div>
             <div className="col-12 col-md-5 d-flex flex-column justify-content-center">
-              {/* <h4>{project.name}</h4> */}
               <p>
                 <span className="smaller-span">
                   HTML, CSS, SASS, Bootstrap, React

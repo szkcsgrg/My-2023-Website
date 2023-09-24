@@ -2,10 +2,10 @@
 //Server Imports & Configuration
 //////////////////////////////////////////////////////////////////////////////
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
 const mysql = require("mysql2");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 require("dotenv").config();
 
 //Server configuration
@@ -30,24 +30,19 @@ app.get("/", (req, res) => {
 //Select from the database.
 ////////////////////////////////////////////////////////////////
 
-//Select all records from Reviews.
 app.get("/reviews", (req, res) => {
-  db.query("SELECT * FROM Reviews", (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
-});
-
-//Select only one record.
-app.get("/reviews/:id", (req, res) => {
   const id = req.params.id;
-  db.query("SELECT * FROM Reviews WHERE `id` = ?", [id], (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
+  db.query(
+    "SELECT * FROM ProjectsDevelopment WHERE reviewWriter is not Null;",
+    [id],
+    (err, result) => {
+      if (err) return res.json(err);
+      return res.json(result);
+    }
+  );
 });
 
-//Select all records from Reviews.
+//Select all records from.
 app.get("/projectsdevelopment", (req, res) => {
   db.query("SELECT * FROM ProjectsDevelopment", (err, result) => {
     if (err) return res.json(err);
