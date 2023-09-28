@@ -13,31 +13,50 @@ function DeveloperAdd() {
 
   //Add new element to the DB.
   const navigate = useNavigate();
-  const [projects, setProjects] = useState({
-    name: "",
-    dateStart: "",
-    stack: "",
-    description1: "",
-    description2: "",
-    image1: null,
-    image2: null,
-    image3: null,
-    image4: null,
-    colorCode: "",
-    href1: "",
-    href2: "",
-    developmentType: "",
-    position: "",
-    dateEnd: "",
-  });
+  const [projects, setProjects] = useState();
+
   const handleChange = (e) => {
-    if (e.target.type === "file") {
-      // Handle file inputs differently
-      setProjects((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
-    } else {
-      setProjects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    }
+    setProjects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const [image1, setImage1] = useState();
+  const [image2, setImage2] = useState();
+  const [image3, setImage3] = useState();
+  const [image4, setImage4] = useState();
+
+  const handleImage1 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage1(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image1: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage2 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage2(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image2: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage3 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage3(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image3: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage4 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage4(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image4: URL.createObjectURL(selectedFile),
+    }));
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -71,28 +90,35 @@ function DeveloperAdd() {
         formData.append("developmentType", projects.developmentType);
         formData.append("position", projects.position);
         formData.append("dateEnd", projects.dateEnd);
+        formData.append("image1", image1);
+        formData.append("image2", image2);
+        formData.append("image3", image3);
+        formData.append("image4", image4);
 
-        // Append selected image files
-        formData.append("image1", projects.image1);
-        formData.append("image2", projects.image2);
-        formData.append("image3", projects.image3);
-        formData.append("image4", projects.image4);
+        // const formDataObject = {};
+        // formData.forEach((value, key) => {
+        //   formDataObject[key] = value;
+        // });
+        // console.log(formDataObject);
+        //console.log(formData);
 
-        console.log(formData, projects);
         const response = await axios.post(
           "http://localhost:8800/developerprojects",
           formData
         );
-
         if (response.status === 200) {
           console.log("Project has been created successfully.");
-          navigate("/login");
+          //navigate("/login");
         } else {
           console.error("Project creation failed.");
         }
       }
     } catch (error) {
-      console.log(error.response.data);
+      if (error.response && error.response.data) {
+        console.log(error.response.data);
+      } else {
+        console.log("Error: ", error);
+      }
     }
   };
 
@@ -163,28 +189,28 @@ function DeveloperAdd() {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleChange}
+                  onChange={handleImage1}
                   name="image1"
                   placeholder="Image 1"
                 />
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleChange}
+                  onChange={handleImage2}
                   name="image2"
                   placeholder="Image 2"
                 />
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleChange}
+                  onChange={handleImage3}
                   name="image3"
                   placeholder="Image 3"
                 />
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={handleChange}
+                  onChange={handleImage4}
                   name="image4"
                   placeholder="Image 4"
                 />

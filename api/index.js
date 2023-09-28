@@ -6,6 +6,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 require("dotenv").config();
 
 //Server configuration
@@ -21,6 +22,23 @@ app.use(express.json());
 app.use(cors());
 app.set("view engine", "ejs");
 
+app.use("/public/images", express.static("public/images"));
+const storage = multer.diskStorage({
+  destination: (reg, file, cb) => {
+    cb(null, "public/images");
+  },
+  filename: (reg, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({
+  storage: storage,
+});
+
 //The default route.
 app.get("/", (req, res) => {
   res.json("This is the backend Server");
@@ -30,6 +48,7 @@ app.get("/", (req, res) => {
 //Select from the database.
 ////////////////////////////////////////////////////////////////
 
+//Select only the exsisting reviews.
 app.get("/reviews", (req, res) => {
   const id = req.params.id;
   db.query(
@@ -66,36 +85,28 @@ app.get("/projectsdevelopment/:id", (req, res) => {
 //Insert into the database.
 ////////////////////////////////////////////////////////////////
 
-// Multer setup for file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../api/uploads"); // Specify your upload directory
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-
-const upload = multer({ storage });
-
 app.post(
   "/developerprojects",
-  upload.array(["image1", "image2", "image3", "image4"]),
+  upload.fields([
+    { name: "image1" },
+    { name: "image2" },
+    { name: "image3" },
+    { name: "image4" },
+  ]),
   (req, res) => {
-    console.log("Received request with body:", req.body);
-    console.log("Received files:", req.files);
-    const images = req.files.map((file) => file.path);
-    const q = `INSERT INTO ProjectsDevelopment (name, dateStart, stack, description1, description2, image1, image2, image3, image3, image4, colorCode, href1, href2, developmentType, position, dateEnd) VALUES (?)`;
+    //console.log(req.body);
+    //console.log(req.files.image1[0].path);
+    const q = `INSERT INTO ProjectsDevelopment (name, dateStart, stack, description1, description2, image1, image2, image3, image4, colorCode, href1, href2, developmentType, position, dateEnd) VALUES (?)`;
     const values = [
       req.body.name,
       req.body.dateStart,
       req.body.stack,
       req.body.description1,
       req.body.description2,
-      images[0],
-      images[1],
-      images[2],
-      images[3],
+      req.files.image1[0].path,
+      req.files.image2[0].path,
+      req.files.image3[0].path,
+      req.files.image4[0].path,
       req.body.colorCode,
       req.body.href1,
       req.body.href2,
@@ -103,7 +114,7 @@ app.post(
       req.body.position,
       req.body.dateEnd,
     ];
-
+    console.log(values);
     db.query(q, [values], (err, result) => {
       if (err) return res.json(err);
       return res.json("Project has been created successfully.");
