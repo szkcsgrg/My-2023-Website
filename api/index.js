@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 app.get("/reviews", (req, res) => {
   const id = req.params.id;
   db.query(
-    "SELECT * FROM ProjectsDevelopment WHERE reviewWriter is not Null;",
+    "SELECT reviewWriter, reviewText FROM ProjectsDevelopment WHERE reviewWriter IS NOT NULL",
     [id],
     (err, result) => {
       if (err) return res.json(err);
@@ -96,7 +96,7 @@ app.post(
   (req, res) => {
     //console.log(req.body);
     //console.log(req.files.image1[0].path);
-    const q = `INSERT INTO ProjectsDevelopment (name, dateStart, stack, description1, description2, image1, image2, image3, image4, colorCode, href1, href2, developmentType, position, dateEnd) VALUES (?)`;
+    const q = `INSERT INTO ProjectsDevelopment (name, dateStart, stack, description1, description2, image1, image2, image3, image4, colorCode, href1, href2, developmentType, position, dateEnd, reviewWriter, reviewText) VALUES (?)`;
     const values = [
       req.body.name,
       req.body.dateStart,
@@ -113,8 +113,9 @@ app.post(
       req.body.developmentType,
       req.body.position,
       req.body.dateEnd,
+      req.body.reviewWriter,
+      req.body.reviewText,
     ];
-    console.log(values);
     db.query(q, [values], (err, result) => {
       if (err) return res.json(err);
       return res.json("Project has been created successfully.");
@@ -125,13 +126,45 @@ app.post(
 ////////////////////////////////////////////////////////////////
 //Delete from the database.
 ////////////////////////////////////////////////////////////////
-app.delete("/cars/:id", (req, res) => {
+app.delete("/developerprojects/:id", (req, res) => {
   const id = req.params.id;
-  const q = `DELETE FROM cars WHERE idcars = ?`;
-
-  db.query(q, [id], (err, result) => {
+  const q_1 = `SELECT image1, image2, image3, image4 FROM ProjectsDevelopment WHERE id = ?`;
+  db.query(q_1, [id], (err, result) => {
     if (err) return res.json(err);
-    return res.json("Project has been deleted successfully.");
+    const imagePath1 = result[0].image1;
+    if (imagePath1) {
+      fs.unlink(imagePath1, (unlinkErr) => {
+        if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+        else console.log("Image1 file deleted successfully:", imagePath1);
+      });
+    }
+    const imagePath2 = result[0].image2;
+    if (imagePath2) {
+      fs.unlink(imagePath2, (unlinkErr) => {
+        if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+        else console.log("Image2 file deleted successfully:", imagePath2);
+      });
+    }
+    const imagePath3 = result[0].image3;
+    if (imagePath3) {
+      fs.unlink(imagePath3, (unlinkErr) => {
+        if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+        else console.log("Image3 file deleted successfully:", imagePath3);
+      });
+    }
+    const imagePath4 = result[0].image4;
+    if (imagePath4) {
+      fs.unlink(imagePath4, (unlinkErr) => {
+        if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+        else console.log("Image4 file deleted successfully:", imagePath4);
+      });
+    }
+
+    const q_2 = `DELETE FROM ProjectsDevelopment WHERE id = ?`;
+    db.query(q_2, [id], (err, result) => {
+      if (err) return res.json(err);
+      return res.json("Project has been deleted successfully.");
+    });
   });
 });
 
@@ -139,34 +172,96 @@ app.delete("/cars/:id", (req, res) => {
 //Upadte in the database.
 ////////////////////////////////////////////////////////////////
 
-app.put("/updateDeveloperProject/:id", (req, res) => {
-  const id = req.params.id;
-  const q =
-    "UPDATE ProjectsDevelopment SET `name` = ?, `dateStart` = ?, `stack` = ?, `description1` = ?, `description2` = ?, `image1` = ?, `image2` = ?, `image3` = ?, `image4` = ?, `colorCode` = ?, `href1` = ?, `href2` = ?, `developmentType` = ?, `position` = ?, `dateEnd` = ? WHERE (`id` = ?)";
+app.put(
+  "/updateDeveloperProject/:id",
+  upload.fields([
+    { name: "image1" },
+    { name: "image2" },
+    { name: "image3" },
+    { name: "image4" },
+  ]),
+  (req, res) => {
+    const id = req.params.id;
+    const values = [
+      req.body.name,
+      req.body.dateStart,
+      req.body.stack,
+      req.body.description1,
+      req.body.description2,
+      req.body.colorCode,
+      req.body.href1,
+      req.body.href2,
+      req.body.developmentType,
+      req.body.position,
+      req.body.dateEnd,
+      req.body.reviewWriter,
+      req.body.reviewText,
+    ];
 
-  const values = [
-    req.body.name,
-    req.body.dateStart,
-    req.body.stack,
-    req.body.description1,
-    req.body.description2,
-    req.body.image1,
-    req.body.image2,
-    req.body.image3,
-    req.body.image4,
-    req.body.colorCode,
-    req.body.href1,
-    req.body.href2,
-    req.body.developmentType,
-    req.body.position,
-    req.body.dateEnd,
-  ];
-
-  db.query(q, [...values, id], (err, result) => {
-    if (err) return res.json("Error: " + err);
-    return res.json("Project has been updated successfully.");
-  });
-});
+    const q_1 = `SELECT image1, image2, image3, image4 FROM ProjectsDevelopment WHERE id = ?`;
+    db.query(q_1, [id], (err, result) => {
+      if (err) return res.json(err);
+      const imagePath1 = result[0].image1;
+      const imagePath2 = result[0].image2;
+      const imagePath3 = result[0].image3;
+      const imagePath4 = result[0].image4;
+      if (req.files.image1) {
+        values.push(req.files.image1[0].path);
+        if (imagePath1) {
+          fs.unlink(imagePath1, (unlinkErr) => {
+            if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+            else console.log("Image1 file deleted successfully:", imagePath1);
+          });
+        }
+      } else {
+        console.log(imagePath1 + " has been added to the values array");
+        values.push(imagePath1);
+      }
+      if (req.files.image2) {
+        values.push(req.files.image2[0].path);
+        if (imagePath2) {
+          fs.unlink(imagePath2, (unlinkErr) => {
+            if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+            else console.log("Image2 file deleted successfully:", imagePath2);
+          });
+        }
+      } else {
+        console.log(imagePath2 + " has been added to the values array");
+        values.push(imagePath2);
+      }
+      if (req.files.image3) {
+        values.push(req.files.image3[0].path);
+        if (imagePath3) {
+          fs.unlink(imagePath3, (unlinkErr) => {
+            if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+            else console.log("Image3 file deleted successfully:", imagePath3);
+          });
+        }
+      } else {
+        console.log(imagePath3 + " has been added to the values array");
+        values.push(imagePath3);
+      }
+      if (req.files.image4) {
+        values.push(req.files.image4[0].path);
+        if (imagePath4) {
+          fs.unlink(imagePath4, (unlinkErr) => {
+            if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
+            else console.log("Image4 file deleted successfully:", imagePath4);
+          });
+        }
+      } else {
+        console.log(imagePath4 + " has been added to the values array");
+        values.push(imagePath4);
+      }
+      const q_2 =
+        "UPDATE ProjectsDevelopment SET `name` = ?, `dateStart` = ?, `stack` = ?, `description1` = ?, `description2` = ?, `colorCode` = ?, `href1` = ?, `href2` = ?, `developmentType` = ?, `position` = ?, `dateEnd` = ?, `reviewWriter` = ?, `reviewText` = ?, `image1` = ?, `image2` = ?, `image3` = ?, `image4` = ? WHERE (`id` = ?)";
+      db.query(q_2, [...values, id], (err, result) => {
+        if (err) return res.json("Error: " + err);
+        return res.json("Project has been updated successfully.");
+      });
+    });
+  }
+);
 
 ////////////////////////////////////////////////////////////////
 //Server listening.

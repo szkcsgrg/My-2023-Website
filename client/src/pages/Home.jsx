@@ -12,7 +12,7 @@ function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="landing d-flex justify-content-center align-items-center flex-column flex-lg-row-reverse m-1 p-1 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="landing d-flex justify-content-center align-items-center flex-column flex-lg-row-reverse m-1 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -35,8 +35,8 @@ function Home() {
           </p>
           <p className="simple-link">
             Feel free to reach out at{" "}
-            <Link to="mailto:szkcsgrg@gmail.com">info@szakacsgergo.com</Link> or{" "}
-            <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
+            <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
+            or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
             For a comprehensive look, feel free to access my{" "}
             <a target="_blank" href={pdf}>
               CV
@@ -45,37 +45,39 @@ function Home() {
           </p>
         </motion.div>
       </motion.section>
-      <Link
-        to="/development"
-        initial={{ opacity: 0, x: "100%" }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 2.5 }}
-        whileInView={{ opacity: 1 }}
-        // onMouseEnter={developmentEnter}
-        // onMouseLeave={developmentExit}
-        className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
-      >
-        <h2 className="z-1 m-0">Software Development</h2>
-        <h2 className="d-none d-lg-block z-0">
-          <span>Software Development</span>
-        </h2>
-        <p>
-          After learning the basics of Programming, I met with the lovely HTML
-          and CSS. At first view, I know they will be the one. Throughout my
-          way, I started to go deeper and deeper. Like every other Website
-          Developer, I also had the usual ways around every aspect. I tried both
-          the backend and frontend as well. In the beginning, I put more effort
-          into the Frontend side. At the moment, I am putting 100% of my power
-          into learning React and Node with Express. I also tried Firebase and
-          some Database solutions such as MySQL and MongoDB.
-        </p>
-      </Link>
       <motion.section
         initial={{ opacity: 0, x: "-100%" }}
-        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 2.5 }}
-        whileInView={{ opacity: 1 }}
-        className="section row d-flex flex-row flex-md-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        whileInView={{ opacity: 1, x: 0 }}
+        className="section row d-flex flex-row flex-md-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
+      >
+        <Link
+          to="/development"
+          // onMouseEnter={developmentEnter}
+          // onMouseLeave={developmentExit}
+        >
+          <h2 className="z-1 m-0">Software Development</h2>
+          <h2 className="d-none d-lg-block z-0">
+            <span>Software Development</span>
+          </h2>
+          <p>
+            After learning the basics of Programming, I met with the lovely HTML
+            and CSS. At first view, I know they will be the one. Throughout my
+            way, I started to go deeper and deeper. Like every other Website
+            Developer, I also had the usual ways around every aspect. I tried
+            both the backend and frontend as well. In the beginning, I put more
+            effort into the Frontend side. At the moment, I am putting 100% of
+            my power into learning React and Node with Express. I also tried
+            Firebase and some Database solutions such as MySQL and MongoDB.
+          </p>
+        </Link>
+      </motion.section>
+
+      <motion.section
+        initial={{ opacity: 0, x: "100%" }}
+        transition={{ duration: 2.5 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        className="section row d-flex flex-row flex-md-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">
           <Link to="/photography">Photography</Link>

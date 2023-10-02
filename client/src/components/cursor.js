@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import TestImage from "../assets/utils/test.webp";
+// import TestImage from "../assets/utils/test.webp";
 
 let developmentEnter, developmentExit, darkEnter, darkExit;
 
@@ -38,7 +38,7 @@ function Cursor() {
       x: mousePosition.x - 8,
       y: mousePosition.y - 8,
       opacity: 0.5,
-      backgroundImage: `url(${TestImage})`,
+      // backgroundImage: `url(${TestImage})`,
       transition: { duration: 0.5 },
     },
     dark: {

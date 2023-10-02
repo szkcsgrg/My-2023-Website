@@ -60,58 +60,34 @@ function DeveloperAdd() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (
-        projects.name === "" ||
-        projects.dateStart === "" ||
-        projects.dateEnd === "" ||
-        projects.stack === "" ||
-        projects.image1 === "" ||
-        projects.image2 === "" ||
-        projects.image3 === "" ||
-        projects.image4 === "" ||
-        projects.description1 === "" ||
-        projects.description2 === "" ||
-        projects.colorCode === "" ||
-        projects.href1 === "" ||
-        projects.developmentType === "" ||
-        projects.position === ""
-      ) {
-        alert("Please fill all fields");
+      const formData = new FormData();
+      formData.append("name", projects.name);
+      formData.append("dateStart", projects.dateStart);
+      formData.append("stack", projects.stack);
+      formData.append("description1", projects.description1);
+      formData.append("description2", projects.description2);
+      formData.append("colorCode", projects.colorCode);
+      formData.append("href1", projects.href1);
+      formData.append("href2", projects.href2);
+      formData.append("developmentType", projects.developmentType);
+      formData.append("position", projects.position);
+      formData.append("dateEnd", projects.dateEnd);
+      formData.append("reviewWriter", projects.reviewWriter);
+      formData.append("reviewText", projects.reviewText);
+      formData.append("image1", image1);
+      formData.append("image2", image2);
+      formData.append("image3", image3);
+      formData.append("image4", image4);
+
+      const response = await axios.post(
+        "http://localhost:8800/developerprojects",
+        formData
+      );
+      if (response.status === 200) {
+        console.log("Project has been created successfully.");
+        navigate("/login");
       } else {
-        const formData = new FormData();
-        formData.append("name", projects.name);
-        formData.append("dateStart", projects.dateStart);
-        formData.append("stack", projects.stack);
-        formData.append("description1", projects.description1);
-        formData.append("description2", projects.description2);
-        formData.append("colorCode", projects.colorCode);
-        formData.append("href1", projects.href1);
-        formData.append("href2", projects.href2);
-        formData.append("developmentType", projects.developmentType);
-        formData.append("position", projects.position);
-        formData.append("dateEnd", projects.dateEnd);
-        formData.append("image1", image1);
-        formData.append("image2", image2);
-        formData.append("image3", image3);
-        formData.append("image4", image4);
-
-        // const formDataObject = {};
-        // formData.forEach((value, key) => {
-        //   formDataObject[key] = value;
-        // });
-        // console.log(formDataObject);
-        //console.log(formData);
-
-        const response = await axios.post(
-          "http://localhost:8800/developerprojects",
-          formData
-        );
-        if (response.status === 200) {
-          console.log("Project has been created successfully.");
-          //navigate("/login");
-        } else {
-          console.error("Project creation failed.");
-        }
+        console.error("Project creation failed.");
       }
     } catch (error) {
       if (error.response && error.response.data) {
@@ -135,109 +111,124 @@ function DeveloperAdd() {
           </div>
         </div>
       ) : user === admin ? (
-        <div className="row d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5 text-center">
+        <div className="d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5 text-center">
           <h3 className="my-5">Add new project</h3>
-          <div className="col-12">
-            <form action="post" className="d-flex flex-row gap-3">
-              <div className="col-md-6 d-flex flex-column gap-2">
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="name"
-                  placeholder="Title"
-                />
-                <div>
-                  <input type="date" onChange={handleChange} name="dateStart" />{" "}
-                  <input type="date" onChange={handleChange} name="dateEnd" />{" "}
-                </div>
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="stack"
-                  placeholder="Stack"
-                />
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="developmentType"
-                  placeholder="Development Type"
-                />
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="position"
-                  placeholder="Position"
-                />
-                <input
-                  type="text"
-                  onChange={handleChange}
-                  name="colorCode"
-                  placeholder="Color Code"
-                />
-                <input
-                  type="href"
-                  onChange={handleChange}
-                  name="href1"
-                  placeholder="Href 1"
-                />
-                <input
-                  type="href"
-                  onChange={handleChange}
-                  name="href2"
-                  placeholder="Href 2"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImage1}
-                  name="image1"
-                  placeholder="Image 1"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImage2}
-                  name="image2"
-                  placeholder="Image 2"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImage3}
-                  name="image3"
-                  placeholder="Image 3"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImage4}
-                  name="image4"
-                  placeholder="Image 4"
-                />
+          <form action="post" className="row">
+            <div className="col-10 col-lg-6 d-flex flex-column gap-2">
+              <input
+                type="text"
+                onChange={handleChange}
+                name="name"
+                placeholder="Title"
+              />
+              <div>
+                <input type="date" onChange={handleChange} name="dateStart" />{" "}
+                <input type="date" onChange={handleChange} name="dateEnd" />{" "}
               </div>
-              <div className="col-md-6">
-                <textarea
-                  name="description1"
+              <input
+                type="text"
+                onChange={handleChange}
+                name="stack"
+                placeholder="Stack"
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                name="developmentType"
+                placeholder="Development Type Eg: Freelance, Personal Project"
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                name="position"
+                placeholder="Position on Page Eg: 1-2-3-4-..."
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                name="colorCode"
+                placeholder="Color Code Eg: #1378h3"
+              />
+              <input
+                type="href"
+                onChange={handleChange}
+                name="href1"
+                placeholder="Github URL"
+              />
+              <input
+                type="href"
+                onChange={handleChange}
+                name="href2"
+                placeholder="Real URL"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage1}
+                name="image1"
+                placeholder="Image 1"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage2}
+                name="image2"
+                placeholder="Image 2"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage3}
+                name="image3"
+                placeholder="Image 3"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage4}
+                name="image4"
+                placeholder="Image 4"
+              />
+            </div>
+            <div className="col-10 col-lg-6">
+              <textarea
+                name="description1"
+                onChange={handleChange}
+                id="description1"
+                cols="75"
+                rows="7"
+                placeholder="Short Overview"
+              ></textarea>
+              <textarea
+                name="description2"
+                onChange={handleChange}
+                id="description2"
+                cols="75"
+                rows="7"
+                placeholder="Project Process"
+              ></textarea>
+            </div>
+            <div className="col-10 col-lg-12 d-flex flex-column align-items-center my-5">
+              <div className="col-6 d-flex flex-column">
+                <input
+                  type="text"
                   onChange={handleChange}
-                  id="description1"
-                  cols="70"
-                  rows="7"
-                  placeholder="Description First"
-                ></textarea>
+                  name="reviewWriter"
+                  placeholder="Review Writer"
+                />
                 <textarea
-                  name="description2"
                   onChange={handleChange}
-                  id="description2"
-                  cols="70"
+                  name="reviewText"
+                  cols="35"
                   rows="7"
-                  placeholder="Description Second"
+                  placeholder="Review Text"
                 ></textarea>
-                <button className="col-2" onClick={handleClick}>
-                  Save
-                </button>
               </div>
-            </form>
-          </div>
+              <button className="col-2 my-4" onClick={handleClick}>
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       ) : (
         <div className="landing row d-flex justify-content-center flex-column align-items-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">

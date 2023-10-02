@@ -2,21 +2,42 @@
 .landing {
   min-height: 80svh;
   position: relative;
+  background-color: colors.$secondary;
+}
+.landing-shorter {
+  min-height: 50svh;
+  position: relative;
+  background-color: colors.$secondary;
 }
 .section {
+  overflow-x: hidden;
   min-height: 35svh;
   height: auto;
   position: relative;
   text-decoration: none;
   color: colors.$main;
+  background-color: colors.$secondary;
   padding: 0;
   margin: 0;
+  Link,
+  a {
+    text-decoration: none;
+    color: colors.$main;
+  }
+  .button {
+    Link,
+    a {
+      text-decoration: none;
+      color: colors.$secondary;
+    }
+  }
 }
 .section-longer {
   height: auto;
   position: relative;
   text-decoration: none;
   color: colors.$main;
+  background-color: colors.$secondary;
   cursor: pointer;
 }
 .section-shorter {
@@ -31,12 +52,18 @@
   position: relative;
 }
 .project {
+  overflow-x: hidden;
   height: auto;
-  min-height: 80svh;
+  min-height: 100svh;
   position: relative;
   text-decoration: none;
   color: colors.$main;
   cursor: pointer;
+  transition: background-color 0.5s ease;
+  a,
+  link {
+    text-decoration: none;
+  }
 }
 .project-thumbnail {
   -webkit-box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
@@ -63,5 +90,9 @@
 }
 .profile-img {
   width: 100%;
+  position: relative;
+}
+.rep-image {
+  width: 80%;
   position: relative;
 }

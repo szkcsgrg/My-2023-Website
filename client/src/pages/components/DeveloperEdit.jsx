@@ -25,6 +25,8 @@ function DeveloperEdit() {
     developmentType: selectedProject.developmentType,
     position: selectedProject.position,
     dateEnd: selectedProject.dateEnd,
+    reviewWriter: selectedProject.reviewWriter,
+    reviewText: selectedProject.reviewText,
   });
 
   const [user, setUser] = useState();
@@ -56,6 +58,8 @@ function DeveloperEdit() {
           developmentType: res.data[0].developmentType,
           position: res.data[0].position,
           dateEnd: res.data[0].dateEnd,
+          reviewWriter: res.data[0].reviewWriter,
+          reviewText: res.data[0].reviewText,
         });
       } catch (error) {
         console.log(error);
@@ -71,31 +75,71 @@ function DeveloperEdit() {
   const handleChange = (e) => {
     setUpdatedProject({ ...updatedProject, [e.target.name]: e.target.value });
   };
+
+  const [image1, setImage1] = useState();
+  const [image2, setImage2] = useState();
+  const [image3, setImage3] = useState();
+  const [image4, setImage4] = useState();
+
+  const handleImage1 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage1(selectedFile);
+    setUpdatedProject((prev) => ({
+      ...prev,
+      image1: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage2 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage2(selectedFile);
+    setUpdatedProject((prev) => ({
+      ...prev,
+      image2: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage3 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage3(selectedFile);
+    setUpdatedProject((prev) => ({
+      ...prev,
+      image3: URL.createObjectURL(selectedFile),
+    }));
+  };
+  const handleImage4 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage4(selectedFile);
+    setUpdatedProject((prev) => ({
+      ...prev,
+      image4: URL.createObjectURL(selectedFile),
+    }));
+  };
+
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (
-        updatedProject.name === "" ||
-        updatedProject.dateStart === "" ||
-        updatedProject.dateEnd === "" ||
-        updatedProject.stack === "" ||
-        updatedProject.image1 === "" ||
-        updatedProject.image2 === "" ||
-        updatedProject.description1 === "" ||
-        updatedProject.description2 === "" ||
-        updatedProject.colorCode === "" ||
-        updatedProject.href1 === "" ||
-        updatedProject.developmentType === "" ||
-        updatedProject.position === ""
-      ) {
-        alert("Please fill all fields");
-      } else {
-        await axios.put(
-          "http://localhost:8800/updateDeveloperProject/" + id,
-          updatedProject
-        );
-        navigate("/login");
-      }
+      const formData = new FormData();
+      formData.append("name", updatedProject.name);
+      formData.append("dateStart", updatedProject.dateStart);
+      formData.append("stack", updatedProject.stack);
+      formData.append("description1", updatedProject.description1);
+      formData.append("description2", updatedProject.description2);
+      formData.append("colorCode", updatedProject.colorCode);
+      formData.append("href1", updatedProject.href1);
+      formData.append("href2", updatedProject.href2);
+      formData.append("developmentType", updatedProject.developmentType);
+      formData.append("position", updatedProject.position);
+      formData.append("dateEnd", updatedProject.dateEnd);
+      formData.append("reviewWriter", updatedProject.reviewWriter);
+      formData.append("reviewText", updatedProject.reviewText);
+      formData.append("image1", image1);
+      formData.append("image2", image2);
+      formData.append("image3", image3);
+      formData.append("image4", image4);
+      await axios.put(
+        "http://localhost:8800/updateDeveloperProject/" + id,
+        formData
+      );
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
@@ -115,132 +159,146 @@ function DeveloperEdit() {
         </div>
       ) : user === admin ? (
         <div className="section d-flex justify-content-center flex-column col-12">
-          <div className="row d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5 text-center">
+          <div className="d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5 text-center">
             <h3 className="my-5">Edit exsisting project</h3>
-            <div className="col-12">
-              <form
-                action="post"
-                className="d-flex flex-row gap-3"
-                key={selectedProject.id}
-              >
-                <div className="col-md-6 d-flex flex-column gap-2">
+
+            <form action="post" className="row" key={selectedProject.id}>
+              <div className="col-10 col-lg-6 d-flex flex-column gap-2">
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="name"
+                  placeholder="Title"
+                  defaultValue={selectedProject.name}
+                />
+                <div>
                   <input
-                    type="text"
+                    type="date"
                     onChange={handleChange}
-                    name="name"
-                    placeholder="Title"
-                    defaultValue={selectedProject.name}
-                  />
-                  <div>
-                    <input
-                      type="date"
-                      onChange={handleChange}
-                      name="dateStart"
-                      defaultValue={selectedProject.dateStart}
-                    />{" "}
-                    <input
-                      type="date"
-                      onChange={handleChange}
-                      name="dateEnd"
-                      defaultValue={selectedProject.dateEnd}
-                    />{" "}
-                  </div>
+                    name="dateStart"
+                    defaultValue={selectedProject.dateStart}
+                  />{" "}
                   <input
-                    type="text"
+                    type="date"
                     onChange={handleChange}
-                    name="stack"
-                    placeholder="Stack"
-                    defaultValue={selectedProject.stack}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="developmentType"
-                    placeholder="Development Type"
-                    defaultValue={selectedProject.developmentType}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="position"
-                    placeholder="Position"
-                    defaultValue={selectedProject.position}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="colorCode"
-                    placeholder="Color Code"
-                    defaultValue={selectedProject.colorCode}
-                  />
-                  <input
-                    type="href"
-                    onChange={handleChange}
-                    name="href1"
-                    placeholder="Href 1"
-                    defaultValue={selectedProject.href1}
-                  />
-                  <input
-                    type="href"
-                    onChange={handleChange}
-                    name="href2"
-                    placeholder="Href 2"
-                    defaultValue={selectedProject.href2}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="image1"
-                    placeholder="Image 1"
-                    defaultValue={selectedProject.image1}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="image2"
-                    placeholder="Image 2"
-                    defaultValue={selectedProject.image2}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="image3"
-                    placeholder="Image 3"
-                    defaultValue={selectedProject.image3}
-                  />
-                  <input
-                    type="text"
-                    onChange={handleChange}
-                    name="image4"
-                    placeholder="Image 4"
-                    defaultValue={selectedProject.image4}
-                  />
+                    name="dateEnd"
+                    defaultValue={selectedProject.dateEnd}
+                  />{" "}
                 </div>
-                <div className="col-md-6">
-                  <textarea
-                    name="description1"
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="stack"
+                  placeholder="Stack"
+                  defaultValue={selectedProject.stack}
+                />
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="developmentType"
+                  placeholder="Development Type"
+                  defaultValue={selectedProject.developmentType}
+                />
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="position"
+                  placeholder="Position"
+                  defaultValue={selectedProject.position}
+                />
+                <input
+                  type="text"
+                  onChange={handleChange}
+                  name="colorCode"
+                  placeholder="Color Code"
+                  defaultValue={selectedProject.colorCode}
+                />
+                <input
+                  type="href"
+                  onChange={handleChange}
+                  name="href1"
+                  placeholder="Href 1"
+                  defaultValue={selectedProject.href1}
+                />
+                <input
+                  type="href"
+                  onChange={handleChange}
+                  name="href2"
+                  placeholder="Href 2"
+                  defaultValue={selectedProject.href2}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage1}
+                  name="image1"
+                  placeholder="Image 1"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage2}
+                  name="image2"
+                  placeholder="Image 2"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage3}
+                  name="image3"
+                  placeholder="Image 3"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImage4}
+                  name="image4"
+                  placeholder="Image 4"
+                />
+              </div>
+              <div className="col-10 col-lg-6">
+                <textarea
+                  name="description1"
+                  onChange={handleChange}
+                  id="description1"
+                  cols="70"
+                  rows="7"
+                  placeholder="Description First"
+                  defaultValue={selectedProject.description1}
+                ></textarea>
+                <textarea
+                  name="description2"
+                  onChange={handleChange}
+                  id="description2"
+                  cols="70"
+                  rows="7"
+                  placeholder="Description Second"
+                  defaultValue={selectedProject.description2}
+                ></textarea>
+              </div>
+              <div className="col-10 col-lg-12 d-flex flex-column align-items-center my-5">
+                <div className="col-6 d-flex flex-column">
+                  <input
+                    type="text"
                     onChange={handleChange}
-                    id="description1"
-                    cols="70"
-                    rows="7"
-                    placeholder="Description First"
-                    defaultValue={selectedProject.description1}
-                  ></textarea>
+                    name="reviewWriter"
+                    placeholder="Review Writer"
+                    defaultValue={selectedProject.reviewWriter}
+                  />
                   <textarea
-                    name="description2"
-                    onChange={handleChange}
-                    id="description2"
-                    cols="70"
+                    name="reviewText"
+                    cols="35"
                     rows="7"
-                    placeholder="Description Second"
-                    defaultValue={selectedProject.description2}
+                    placeholder="Review Text"
+                    onChange={handleChange}
+                    defaultValue={selectedProject.reviewText}
                   ></textarea>
-                  <button className="col-2" onClick={handleClick}>
-                    Save
-                  </button>
                 </div>
-              </form>
-            </div>
+                <button className="col-2 my-4" onClick={handleClick}>
+                  Save
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       ) : (

@@ -9,7 +9,6 @@ import "swiper/css/effect-fade";
 
 import { darkEnter, darkExit } from "../components/cursor";
 
-import testImage from "../assets/utils/Untitled.png";
 import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
 
 function Development() {
@@ -44,13 +43,38 @@ function Development() {
     fecthAllProjects();
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll(".project");
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const rect = section.getBoundingClientRect();
+        const isLastSection = i === sections.length - 1;
+        const isBottomVisible = rect.bottom <= window.innerHeight;
+
+        if (isBottomVisible && !isLastSection) {
+          const nextSection = sections[i + 1];
+          nextSection.scrollIntoView({ behavior: "smooth" });
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="section row d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        transition={{ duration: 2 }}
+        className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">Software Development</h2>
         <h2 className="d-none d-lg-block z-0">
@@ -58,14 +82,14 @@ function Development() {
         </h2>
       </motion.section>
       {/* Overview */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="section-longer row d-flex flex-column m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5"
-      >
+      <section className="section-longer row d-flex flex-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5">
         <div className="d-flex flex-column flex-lg-row gap-3">
-          <div className="col-lg-4">
+          <motion.div
+            initial={{ opacity: 0, x: "-100%" }}
+            transition={{ duration: 1.5 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="col-lg-4"
+          >
             <h3>Short Overview</h3>
             <p>
               I'm a Junior website developer with a passion for crafting
@@ -73,8 +97,13 @@ function Development() {
               My journey began with an oriented matura in Computer Science,
               further solidified by a Certificate as a Software Developer
             </p>
-          </div>
-          <p className="col-lg-8 smaller-text margin-top-075">
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 1.5 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="col-lg-8 smaller-text margin-top-075"
+          >
             With an eye for design and a knack for problem-solving, I've
             embarked on diverse projects that bring imagination to life. You can
             also read reviews from satisfied clients below, attesting to my
@@ -87,7 +116,7 @@ function Development() {
             extraordinary heights. This multifaceted experience has equipped me
             with adaptability and a holistic perspective that enriches every
             facet of my development approach.
-          </p>
+          </motion.p>
         </div>
         <br />
         <br />
@@ -99,28 +128,29 @@ function Development() {
         <p className="smaller-text">
           Currently seeking new opportunities, I'm excited to contribute my
           skills to your next project. <br /> Feel free to reach out at{" "}
-          <Link to="mailto:szkcsgrg@gmail.com">info@szakacsgergo.com</Link> or{" "}
-          <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
+          <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
+          or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
           For a comprehensive look, feel free to access my{" "}
           <a target="_blank" href={pdf}>
             CV
           </a>{" "}
           for more details.
         </p>
-      </motion.section>
+      </section>
       {/* Reviews */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
+      <section
         className="section-shorter dark"
         onMouseEnter={darkEnter}
         onMouseLeave={darkExit}
       >
-        <div className="row m-0 p-0 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
-          <h3>
+        <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
+          <motion.h3
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 2 }}
+          >
             <span>Reviews</span>
-          </h3>
+          </motion.h3>
 
           <Swiper
             modules={[Navigation, Scrollbar, A11y, EffectFade]}
@@ -131,10 +161,6 @@ function Development() {
             scrollbar={{ draggable: true }}
             loopPreventsSliding={false}
           >
-            {/*
-             *IMPORTANT NOTE
-             * Ha Project.reviewWriter is not undefined or "" show.
-             */}
             {reviews.map((review) => (
               <SwiperSlide key={review.id}>
                 <p>{review.reviewWriter}</p>
@@ -143,19 +169,18 @@ function Development() {
             ))}
           </Swiper>
         </div>
-      </motion.section>
+      </section>
+
       {/* Projects */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="section-longer"
-      >
-        <div className="row d-flex flex-column m-0 p-0 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
-          <h2 className="z-1 m-b-1">Featured Projects</h2>
-          <h2 className="d-none d-lg-block z-0">
-            <span>Featured Projects</span>
-          </h2>
+      <section className="section-longer">
+        <div className="row d-flex flex-column m-0 p-0">
+          <div className=" py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
+            <h2 className="z-1 my-3 my-lg-0 p-2">Featured Projects</h2>
+            <h2 className="d-none d-lg-block z-0">
+              <span>Featured Projects</span>
+            </h2>
+          </div>
+
           {/*
            * IMPORTANT NOTE
            * Add Background color, and change color of the cursor.
@@ -166,63 +191,55 @@ function Development() {
            * Query from DB. TO="project-name" ORDER BY DATE DESC
            */}
 
-          {/* Project 1 */}
           {projects.map((project) => (
             <Link
               key={project.id}
-              className="project d-flex flex-column flex-md-row gap-5"
               to={`/project/${project.id}`}
+              className="text-dec-none"
             >
-              <div className="col-12 col-md-5 offset-md-1 d-flex flex-column justify-content-center">
-                <div className="justify-content-end">
-                  <h4>{project.name}</h4>
-                  <p>
-                    <span className="smaller-span">{project.stack}</span>
-                    <br />
-                    <span className="smaller-span">
-                      {project.dateStart}-{project.dateEnd}
-                    </span>
-                    <br />
-                    <span className="smaller-span">
-                      {project.developmentType}
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div className="col-12 col-md-5 d-flex justify-content-end">
-                <img
-                  className="img-thumbnail border-0 project-thumbnail"
-                  src={project.image1}
-                  alt="Project Image should be here."
-                />
-              </div>
+              <motion.div
+                transition={{ duration: 2.5 }}
+                whileInView={{ backgroundColor: project.colorCode }}
+                className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
+              >
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  transition={{ duration: 1.5 }}
+                  whileInView={{ x: 0 }}
+                  className="col-12 col-md-5 offset-md-1 d-flex flex-column px-3"
+                >
+                  <div className="justify-content-end">
+                    <h4>{project.name}</h4>
+                    <p>
+                      <span className="smaller-span">{project.stack}</span>
+                      <br />
+                      <span className="smaller-span">
+                        {project.dateStart}-{project.dateEnd}
+                      </span>
+                      <br />
+                      <span className="smaller-span">
+                        {project.developmentType}
+                      </span>
+                    </p>
+                  </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: "100%" }}
+                  transition={{ duration: 1.5 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  className="col-12 col-md-5 d-flex justify-content-end px-3"
+                >
+                  <img
+                    className="img-thumbnail border-0 project-thumbnail"
+                    src={`http://localhost:8800/${project.image1}`}
+                    alt="Project Image should be here."
+                  />
+                </motion.div>
+              </motion.div>
             </Link>
           ))}
-          <Link
-            className="project d-flex flex-column flex-md-row gap-5"
-            to="/projects/RandomProject"
-          >
-            <div className="col-12 col-md-5 offset-md-1">
-              <img
-                className="img-thumbnail border-0 project-thumbnail"
-                src={testImage}
-                alt="Project Image should be here."
-              />
-            </div>
-            <div className="col-12 col-md-5 d-flex flex-column justify-content-center">
-              <p>
-                <span className="smaller-span">
-                  HTML, CSS, SASS, Bootstrap, React
-                </span>
-                <br />
-                <span className="smaller-span">2022.03.12-2023.01.01.</span>
-                <br />
-                <span className="smaller-span">Freelance</span>
-              </p>
-            </div>
-          </Link>
         </div>
-      </motion.section>
+      </section>
     </>
   );
 }
