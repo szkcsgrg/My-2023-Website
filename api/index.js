@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(cors());
 app.set("view engine", "ejs");
 
+app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/public/images", express.static("public/images"));
 const storage = multer.diskStorage({
   destination: (reg, file, cb) => {
@@ -37,6 +38,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage: storage,
+});
+
+app.use("/public/cv", express.static("public/cv"));
+const storage2 = multer.diskStorage({
+  destination: (reg, file, cb) => {
+    cb(null, "public/cv");
+  },
+  filename: (reg, file, cb) => {
+    cb(null, "Gergo Szakacs - CV.pdf");
+  },
+});
+
+const uploadCV = multer({
+  storage: storage2,
 });
 
 //The default route.
@@ -122,6 +137,10 @@ app.post(
     });
   }
 );
+
+app.post("/cv", uploadCV.single("cv"), (req, res) => {
+  console.log(req.file);
+});
 
 ////////////////////////////////////////////////////////////////
 //Delete from the database.

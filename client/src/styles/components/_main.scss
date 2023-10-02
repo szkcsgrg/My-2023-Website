@@ -7,6 +7,8 @@
 
 html,
 body {
+  scroll-behavior: smooth;
+  scroll-padding-top: 10em;
   font-family: "Roboto", sans-serif;
   height: 100%;
   margin: 0;
@@ -202,6 +204,8 @@ span {
 .logo {
   font-size: calc(100% + 0.3vw + 0.3vh);
 }
+
+.buttonClone,
 button {
   background-color: colors.$main;
   text-decoration: none;
@@ -235,6 +239,7 @@ input {
   background-color: colors.$secondary;
   border-bottom: 1px solid colors.$main;
 }
+
 textarea {
   border: none;
   background-color: colors.$secondary;
@@ -299,4 +304,8 @@ textarea {
 }
 .mt-lg-5 {
   margin-top: 10rem !important;
+}
+.d-show {
+  opacity: 1;
+  display: inline-block;
 }

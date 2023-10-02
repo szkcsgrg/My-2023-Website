@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 html,
 body {
+  scroll-behavior: smooth;
+  scroll-padding-top: 10em;
   font-family: "Roboto", sans-serif;
   height: 100%;
   margin: 0;
@@ -224,6 +226,7 @@ span {
   font-size: calc(100% + 0.3vw + 0.3vh);
 }
 
+.buttonClone,
 button {
   background-color: #232323;
   text-decoration: none;
@@ -234,6 +237,8 @@ button {
   font-size: calc(100% + 0.02vw + 0.02vh);
   transition: all 0.2s ease-in-out;
 }
+.buttonClone Link,
+.buttonClone a,
 button Link,
 button a {
   text-decoration: none;
@@ -325,6 +330,11 @@ textarea {
 
 .mt-lg-5 {
   margin-top: 10rem !important;
+}
+
+.d-show {
+  opacity: 1;
+  display: inline-block;
 }
 
 .landing {

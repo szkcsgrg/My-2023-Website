@@ -92,6 +92,12 @@ function Project() {
               Launch Project
             </a>
           </p>
+          {project.reviewWriter ? (
+            <p className="description col-12">
+              <h4>{project.reviewWriter}</h4>
+              <q>{project.reviewText}</q>
+            </p>
+          ) : null}
         </div>
       </section>
     </section>

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 // import TestImage from "../assets/utils/test.webp";
 
-let developmentEnter, developmentExit, darkEnter, darkExit;
+let developmentEnter,
+  developmentExit,
+  darkEnter,
+  darkExit,
+  headerEnter,
+  headerExit;
 
 function Cursor() {
   const [cursorVariant, setCursorVariant] = useState("");
@@ -47,12 +52,21 @@ function Cursor() {
       backgroundColor: "#f3f3f3",
       cursor: "move",
     },
+    header: {
+      height: 200,
+      width: 200,
+      x: mousePosition.x - 100,
+      y: mousePosition.y - 100,
+      backgroundColor: "#f3f3f3",
+    },
   };
 
   developmentEnter = () => setCursorVariant("development");
   developmentExit = () => setCursorVariant("default");
   darkEnter = () => setCursorVariant("dark");
   darkExit = () => setCursorVariant("default");
+  headerEnter = () => setCursorVariant("header");
+  headerExit = () => setCursorVariant("default");
 
   // remove the d-none from the video tag when development enter.
   return (
@@ -68,5 +82,12 @@ function Cursor() {
   );
 }
 
-export { developmentEnter, developmentExit, darkEnter, darkExit };
+export {
+  developmentEnter,
+  developmentExit,
+  darkEnter,
+  darkExit,
+  headerEnter,
+  headerExit,
+};
 export default Cursor;

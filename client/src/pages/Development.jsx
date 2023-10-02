@@ -67,7 +67,7 @@ function Development() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
   return (
     <>
       <motion.section
@@ -125,13 +125,13 @@ function Development() {
         </p>
         <br />
         <br />
-        <p className="smaller-text">
+        <p className="smaller-text" id="contact">
           Currently seeking new opportunities, I'm excited to contribute my
           skills to your next project. <br /> Feel free to reach out at{" "}
           <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
           or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
           For a comprehensive look, feel free to access my{" "}
-          <a target="_blank" href={pdf}>
+          <a target="_blank" href={CV}>
             CV
           </a>{" "}
           for more details.
@@ -139,6 +139,7 @@ function Development() {
       </section>
       {/* Reviews */}
       <section
+        id="reviews"
         className="section-shorter dark"
         onMouseEnter={darkEnter}
         onMouseLeave={darkExit}
@@ -161,18 +162,22 @@ function Development() {
             scrollbar={{ draggable: true }}
             loopPreventsSliding={false}
           >
-            {reviews.map((review) => (
-              <SwiperSlide key={review.id}>
-                <p>{review.reviewWriter}</p>
-                <q className="smaller-text">{review.reviewText}</q>
-              </SwiperSlide>
-            ))}
+            {reviews.map((review) => {
+              if (review.reviewWriter) {
+                return (
+                  <SwiperSlide key={review.id}>
+                    <p>{review.reviewWriter}</p>
+                    <q className="smaller-text">{review.reviewText}</q>
+                  </SwiperSlide>
+                );
+              }
+            })}
           </Swiper>
         </div>
       </section>
 
       {/* Projects */}
-      <section className="section-longer">
+      <section className="section-longer" id="projects">
         <div className="row d-flex flex-column m-0 p-0">
           <div className=" py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
             <h2 className="z-1 my-3 my-lg-0 p-2">Featured Projects</h2>

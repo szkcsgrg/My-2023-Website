@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { developmentEnter, developmentExit } from "../components/cursor";
 import { motion } from "framer-motion";
-import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
 import profile from "../assets/utils/Profile.png";
 
 function Home() {
+  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
+
   return (
     <article>
       <motion.section
@@ -38,7 +39,7 @@ function Home() {
             <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
             or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
             For a comprehensive look, feel free to access my{" "}
-            <a target="_blank" href={pdf}>
+            <a target="_blank" href={CV}>
               CV
             </a>{" "}
             for more details.

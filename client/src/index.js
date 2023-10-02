@@ -40,6 +40,15 @@ const Layout = () => {
       </>
     );
   }
+  if (pathname.startsWith("/project")) {
+    return (
+      <>
+        <DevelopmentHeader />
+        <Cursor />
+        <Outlet />
+      </>
+    );
+  }
   if (pathname === "/photography") {
     return (
       <>
