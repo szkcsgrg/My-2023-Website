@@ -25,7 +25,7 @@ function Login() {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(userEmail));
     console.log(localStorage);
-  }, [userName]);
+  }, [userName, userEmail]);
 
   return (
     <motion.section

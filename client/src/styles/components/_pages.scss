@@ -5,7 +5,7 @@
   background-color: colors.$secondary;
 }
 .landing-shorter {
-  min-height: 50svh;
+  min-height: 55svh;
   position: relative;
   background-color: colors.$secondary;
 }
@@ -95,4 +95,10 @@
 .rep-image {
   width: 80%;
   position: relative;
+}
+.project-container {
+  cursor: default;
+}
+.cursor-default {
+  cursor: default;
 }

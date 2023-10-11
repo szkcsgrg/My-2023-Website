@@ -15,8 +15,21 @@ function DeveloperAdd() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState();
 
+  const formatDateToDDMMYYYY = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}.${month}.${year}`;
+  };
+
   const handleChange = (e) => {
-    setProjects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+
+    // If the field is a date, format it as "dd.mm.yyyy"
+    if (name === "dateStart" || name === "dateEnd") {
+      const formattedDate = formatDateToDDMMYYYY(value);
+      setProjects((prev) => ({ ...prev, [name]: formattedDate }));
+    } else {
+      setProjects((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const [image1, setImage1] = useState();
@@ -229,6 +242,45 @@ function DeveloperAdd() {
               </button>
             </div>
           </form>
+          <div className="col-6">
+            <h3>Sample</h3>
+            <p>
+              <h4>Project Overview:</h4>
+              <ul>
+                <li>
+                  Brief Project Description: A concise summary of the project,
+                  highlighting its purpose and context.
+                </li>
+                <li>
+                  Project Goals and Objectives: Clear objectives and goals the
+                  project aimed to achieve, aligning with the client's needs or
+                  business objectives.
+                </li>
+                <li>
+                  Technologies Used: Mention the key technologies, frameworks,
+                  or tools utilized in the project's development.
+                </li>
+              </ul>
+              <h4>Development Journey:</h4>
+              <ul>
+                <li>
+                  Planning and Setup: Detail the initial planning phase,
+                  including project setup, technology selection, and defining
+                  the roadmap.
+                </li>
+                <li>
+                  Design and Iterations: Discuss the design process, including
+                  iterations and refinements based on feedback and project
+                  goals.
+                </li>
+                <li>
+                  Development, Testing, and Deployment: Describe the development
+                  process, testing procedures, and deployment strategy,
+                  highlighting key steps and considerations.
+                </li>
+              </ul>
+            </p>
+          </div>
         </div>
       ) : (
         <div className="landing row d-flex justify-content-center flex-column align-items-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5">

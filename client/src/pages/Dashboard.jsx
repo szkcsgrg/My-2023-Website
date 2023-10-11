@@ -5,20 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
   //Get all the rows from the database.
-  const [reviews, setReviews] = useState([]);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     //Async fucntion is needed to communicate with the backend.
-    const fecthAllReviews = async () => {
-      try {
-        const res = await axios.get("http://localhost:8800/reviews");
-        setReviews(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
@@ -31,7 +21,6 @@ function Dashboard() {
     };
 
     //Call the function.
-    fecthAllReviews();
     fecthAllProjects();
   }, []);
 
@@ -55,7 +44,7 @@ function Dashboard() {
       const response = await axios.post("http://localhost:8800/cv", formData);
       if (response.status === 200) {
         console.log("CV has been successfully uploaded.");
-        alert("CV has been successfully uploaded");
+        navigate("/login");
       } else {
         console.error("CV upload failed.");
       }

@@ -30,7 +30,7 @@ function DevelopmentHeader() {
         <p className="simple-link d-none d-md-block">
           <a href="/development#projects">Projects</a>
         </p>
-        <p className="d-none d-md-block">/</p>
+        <p>/</p>
         <p className="simple-link">
           <Link to="/photography">Photography</Link>
         </p>

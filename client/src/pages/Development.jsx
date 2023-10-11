@@ -9,8 +9,6 @@ import "swiper/css/effect-fade";
 
 import { darkEnter, darkExit } from "../components/cursor";
 
-import pdf from "../assets/documents/Gergő Szakács - CV.pdf";
-
 function Development() {
   //Get all the rows from the database.
   const [reviews, setReviews] = useState([]);
@@ -67,6 +65,34 @@ function Development() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const rgbaColor = (color, opacity) => {
+    const validColor = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(color);
+
+    const validOpacity =
+      opacity !== undefined && !isNaN(opacity) && opacity >= 0 && opacity <= 1;
+
+    if (!validColor || !validOpacity) {
+      console.error("Invalid color or opacity:", color, opacity);
+      // Provide a fallback color (e.g., white) with the specified opacity or 1.0 (fully opaque)
+      return "#f3f3f3";
+    }
+
+    const hexToRgb = (hex) =>
+      hex
+        .replace(
+          /^#?([A-Fa-f0-9])([A-Fa-f0-9])([A-Fa-f0-9])$/i,
+          (m, r, g, b) => `#${r}${r}${g}${g}${b}${b}`
+        )
+        .substring(1)
+        .match(/.{2}/g)
+        .map((x) => parseInt(x, 16));
+
+    const [r, g, b] = hexToRgb(color);
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  };
+
   const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
   return (
     <>
@@ -131,7 +157,7 @@ function Development() {
           <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
           or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
           For a comprehensive look, feel free to access my{" "}
-          <a target="_blank" href={CV}>
+          <a target="_blank" rel="noreferrer" href={CV}>
             CV
           </a>{" "}
           for more details.
@@ -145,13 +171,10 @@ function Development() {
         onMouseLeave={darkExit}
       >
         <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
-          <motion.h3
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 2 }}
-          >
-            <span>Reviews</span>
-          </motion.h3>
+          <h3 className="z-2">Reviews</h3>
+          <h3 className="d-none d-lg-block z-1">
+            <span className="text-truncate">Reviews</span>
+          </h3>
 
           <Swiper
             modules={[Navigation, Scrollbar, A11y, EffectFade]}
@@ -171,6 +194,7 @@ function Development() {
                   </SwiperSlide>
                 );
               }
+              return null;
             })}
           </Swiper>
         </div>
@@ -185,17 +209,6 @@ function Development() {
               <span>Featured Projects</span>
             </h2>
           </div>
-
-          {/*
-           * IMPORTANT NOTE
-           * Add Background color, and change color of the cursor.
-           */}
-
-          {/*
-           *IMPORTANT NOTE
-           * Query from DB. TO="project-name" ORDER BY DATE DESC
-           */}
-
           {projects.map((project) => (
             <Link
               key={project.id}
@@ -204,27 +217,27 @@ function Development() {
             >
               <motion.div
                 transition={{ duration: 2.5 }}
-                whileInView={{ backgroundColor: project.colorCode }}
+                whileInView={{
+                  backgroundColor: rgbaColor(project.colorCode, 0.2),
+                }}
                 className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
               >
                 <motion.div
                   initial={{ x: "-100%" }}
                   transition={{ duration: 1.5 }}
                   whileInView={{ x: 0 }}
-                  className="col-12 col-md-5 offset-md-1 d-flex flex-column px-3"
+                  className="col-12 col-md-5 offset-md-1 d-flex flex-column px-3 pt-5 pt-md-0"
                 >
                   <div className="justify-content-end">
-                    <h4>{project.name}</h4>
+                    <h3 className="z-2">{project.name}</h3>
                     <p>
-                      <span className="smaller-span">{project.stack}</span>
+                      <span>{project.stack}</span>
                       <br />
-                      <span className="smaller-span">
+                      <span>
                         {project.dateStart}-{project.dateEnd}
                       </span>
                       <br />
-                      <span className="smaller-span">
-                        {project.developmentType}
-                      </span>
+                      <span>{project.developmentType}</span>
                     </p>
                   </div>
                 </motion.div>
@@ -237,7 +250,7 @@ function Development() {
                   <img
                     className="img-thumbnail border-0 project-thumbnail"
                     src={`http://localhost:8800/${project.image1}`}
-                    alt="Project Image should be here."
+                    alt="Thumbnail of the project"
                   />
                 </motion.div>
               </motion.div>

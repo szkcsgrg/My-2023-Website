@@ -7,7 +7,9 @@ let developmentEnter,
   darkEnter,
   darkExit,
   headerEnter,
-  headerExit;
+  headerExit,
+  projectEnter,
+  projectExit;
 
 function Cursor() {
   const [cursorVariant, setCursorVariant] = useState("");
@@ -59,6 +61,11 @@ function Cursor() {
       y: mousePosition.y - 100,
       backgroundColor: "#f3f3f3",
     },
+    project: {
+      x: mousePosition.x - 8,
+      y: mousePosition.y - 8,
+      backgroundColor: "#000",
+    },
   };
 
   developmentEnter = () => setCursorVariant("development");
@@ -67,6 +74,8 @@ function Cursor() {
   darkExit = () => setCursorVariant("default");
   headerEnter = () => setCursorVariant("header");
   headerExit = () => setCursorVariant("default");
+  projectEnter = () => setCursorVariant("project");
+  projectExit = () => setCursorVariant("default");
 
   // remove the d-none from the video tag when development enter.
   return (
@@ -89,5 +98,7 @@ export {
   darkExit,
   headerEnter,
   headerExit,
+  projectEnter,
+  projectExit,
 };
 export default Cursor;

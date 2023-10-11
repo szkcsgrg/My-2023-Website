@@ -66,14 +66,27 @@ function DeveloperEdit() {
       }
     };
     fetchOneProject();
-  }, []);
+  }, [id]);
 
   ////////////////////////////////////////////////////////////////
   //Update the project
   ////////////////////////////////////////////////////////////////
 
+  const formatDateToDDMMYYYY = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}.${month}.${year}`;
+  };
+
   const handleChange = (e) => {
-    setUpdatedProject({ ...updatedProject, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // If the field is a date, format it as "dd.mm.yyyy"
+    if (name === "dateStart" || name === "dateEnd") {
+      const formattedDate = formatDateToDDMMYYYY(value);
+      setUpdatedProject((prev) => ({ ...prev, [name]: formattedDate }));
+    } else {
+      setUpdatedProject((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const [image1, setImage1] = useState();

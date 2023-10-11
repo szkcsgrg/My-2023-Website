@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { developmentEnter, developmentExit } from "../components/cursor";
 import { motion } from "framer-motion";
 import profile from "../assets/utils/Profile.png";
 
@@ -39,7 +38,7 @@ function Home() {
             <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
             or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
             For a comprehensive look, feel free to access my{" "}
-            <a target="_blank" href={CV}>
+            <a target="_blank" rel="noreferrer" href={CV}>
               CV
             </a>{" "}
             for more details.

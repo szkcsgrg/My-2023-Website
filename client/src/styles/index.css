@@ -53,7 +53,7 @@ h2 span {
   position: absolute;
   top: -1.3em;
   left: -0.3em;
-  font-size: calc(100% + 2.5vw + 2.5vh);
+  font-size: calc(100% + 1.7vw + 1.7vh);
   color: rgba(0, 0, 0, 0.0666666667);
 }
 h2 Link,
@@ -69,13 +69,28 @@ h3 {
   margin: 0;
 }
 h3 span {
-  color: #d7942d;
+  font-family: "Kanit", sans-serif;
   font-weight: medium;
+  font-size: calc(100% + 1.7vw + 1.7vh);
+  position: absolute;
+  top: 0.75em;
+  left: 0.75em;
+  color: #d7942d;
+  opacity: 0.5;
 }
 
 h4 {
   font-weight: 400;
   margin: 0;
+}
+h4 span {
+  font-family: "Kanit", sans-serif;
+  font-weight: medium;
+  font-size: calc(100% + 2.5vw + 2.5vh);
+  position: absolute;
+  top: -3.6em;
+  left: -1.8em;
+  opacity: 0.2;
 }
 
 header p {
@@ -290,12 +305,13 @@ textarea {
 
 .description {
   font-family: "Roboto", sans-serif;
-  font-size: calc(100% + 0.3vw + 0.3vh);
+  font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
   margin: 0;
   padding: 0;
 }
-.description pre {
+.description pre,
+.description ReactMarkdown {
   font-family: "Roboto", sans-serif;
   font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
@@ -344,7 +360,7 @@ textarea {
 }
 
 .landing-shorter {
-  min-height: 50svh;
+  min-height: 55svh;
   position: relative;
   background-color: #f3f3f3;
 }
@@ -439,6 +455,14 @@ textarea {
 .rep-image {
   width: 80%;
   position: relative;
+}
+
+.project-container {
+  cursor: default;
+}
+
+.cursor-default {
+  cursor: default;
 }
 
 .cursor {

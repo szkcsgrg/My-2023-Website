@@ -78,10 +78,13 @@ app.get("/reviews", (req, res) => {
 
 //Select all records from.
 app.get("/projectsdevelopment", (req, res) => {
-  db.query("SELECT * FROM ProjectsDevelopment", (err, result) => {
-    if (err) return res.json(err);
-    return res.json(result);
-  });
+  db.query(
+    "SELECT * FROM ProjectsDevelopment ORDER BY position asc",
+    (err, result) => {
+      if (err) return res.json(err);
+      return res.json(result);
+    }
+  );
 });
 //Select only one record.
 app.get("/projectsdevelopment/:id", (req, res) => {
@@ -124,14 +127,18 @@ app.post(
       req.files.image4[0].path,
       req.body.colorCode,
       req.body.href1,
-      req.body.href2,
+      req.body.href2 || null,
       req.body.developmentType,
       req.body.position,
-      req.body.dateEnd,
-      req.body.reviewWriter,
-      req.body.reviewText,
+      req.body.dateEnd || null,
+      req.body.reviewWriter || null,
+      req.body.reviewText || null,
     ];
-    db.query(q, [values], (err, result) => {
+    const sanitizedValues = values.map((value) =>
+      value === "undefined" ? null : value
+    );
+
+    db.query(q, [sanitizedValues], (err, result) => {
       if (err) return res.json(err);
       return res.json("Project has been created successfully.");
     });
@@ -209,12 +216,12 @@ app.put(
       req.body.description2,
       req.body.colorCode,
       req.body.href1,
-      req.body.href2,
+      req.body.href2 || null,
       req.body.developmentType,
       req.body.position,
-      req.body.dateEnd,
-      req.body.reviewWriter,
-      req.body.reviewText,
+      req.body.dateEnd || null,
+      req.body.reviewWriter || null,
+      req.body.reviewText || null,
     ];
 
     const q_1 = `SELECT image1, image2, image3, image4 FROM ProjectsDevelopment WHERE id = ?`;
@@ -274,7 +281,10 @@ app.put(
       }
       const q_2 =
         "UPDATE ProjectsDevelopment SET `name` = ?, `dateStart` = ?, `stack` = ?, `description1` = ?, `description2` = ?, `colorCode` = ?, `href1` = ?, `href2` = ?, `developmentType` = ?, `position` = ?, `dateEnd` = ?, `reviewWriter` = ?, `reviewText` = ?, `image1` = ?, `image2` = ?, `image3` = ?, `image4` = ? WHERE (`id` = ?)";
-      db.query(q_2, [...values, id], (err, result) => {
+      const sanitizedValues = values.map((value) =>
+        value === "undefined" ? null : value
+      );
+      db.query(q_2, [...sanitizedValues, id], (err, result) => {
         if (err) return res.json("Error: " + err);
         return res.json("Project has been updated successfully.");
       });
