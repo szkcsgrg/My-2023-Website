@@ -3,3 +3,6 @@ client/.env
 client/src/assets/utils/test.png
 client/src/assets/utils/test.jpeg
 api/.env
+api/public/images/image1_1696080143745.png
+*.png
+*.webp
