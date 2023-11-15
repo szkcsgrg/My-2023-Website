@@ -16,7 +16,13 @@ body {
   background-color: colors.$secondary;
   color: colors.$main;
   overflow-x: hidden;
+  //background-image: url("../assets/utils/BackgroundTopographicMap.png");
 }
+/*
+.background {
+  background-image: url("../assets/utils/BackgroundTopographicMap.png"); 
+}
+*/
 .dark ::selection {
   background: colors.$secondary;
   color: colors.$main;

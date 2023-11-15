@@ -12,11 +12,15 @@ body {
   overflow-x: hidden;
 }
 
+/*
+.background {
+  background-image: url("../assets/utils/BackgroundTopographicMap.png"); 
+}
+*/
 .dark ::-moz-selection {
   background: #f3f3f3;
   color: #232323;
 }
-
 .dark ::selection {
   background: #f3f3f3;
   color: #232323;

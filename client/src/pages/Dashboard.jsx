@@ -12,7 +12,7 @@ function Dashboard() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/projectsdevelopment"
+          `${process.env.REACT_APP_BACKEND_SERVER}:8800/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -26,7 +26,9 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/developerprojects/` + id);
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_SERVER}:8800/developerprojects/` + id
+      );
       window.location.reload();
       //setProjects(projects.filter((project) => project.id !== id));
     } catch (error) {
@@ -41,7 +43,10 @@ function Dashboard() {
       const formData = new FormData();
       formData.append("cv", e.target.files[0]);
 
-      const response = await axios.post("http://localhost:8800/cv", formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_SERVER}:8800/cv`,
+        formData
+      );
       if (response.status === 200) {
         console.log("CV has been successfully uploaded.");
         navigate("/login");

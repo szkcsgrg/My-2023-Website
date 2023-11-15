@@ -93,7 +93,7 @@ function DeveloperAdd() {
       formData.append("image4", image4);
 
       const response = await axios.post(
-        "http://localhost:8800/developerprojects",
+        `${process.env.REACT_APP_BACKEND_SERVER}:8800/developerprojects`,
         formData
       );
       if (response.status === 200) {

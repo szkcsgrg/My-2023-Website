@@ -18,6 +18,7 @@ const db = mysql.createConnection({
   database: process.env.DATABASE_DATABASE,
 });
 
+const port = 8800;
 app.use(express.json());
 app.use(cors());
 app.set("view engine", "ejs");
