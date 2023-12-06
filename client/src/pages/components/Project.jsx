@@ -130,14 +130,14 @@ function Project() {
         </div>
       </motion.section>
       <section className="section row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-3 p-lg-3 d-flex justify-content-center text-center">
-        <div className="col-10 col-md-6 text-center">
+        <div className="col-12 col-md-6 text-center">
           <img
             className="rep-image text-center"
             alt="UI element"
             src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image3}`}
           />
         </div>
-        <div className="col-10 col-md-6 mt-lg-5 mt-0 text-center">
+        <div className="col-12 col-md-6 mt-lg-5 mt-0 text-center">
           <img
             alt="UI element"
             className="rep-image text-center"
@@ -145,7 +145,7 @@ function Project() {
           />
         </div>
       </section>
-      <section className="section-longer d-flex justify-content-center flex-column">
+      <section className="section-longer-nc d-flex justify-content-center flex-column">
         <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
           <h3 className="my-2">Development Journey</h3>
           <p className="description col-12">

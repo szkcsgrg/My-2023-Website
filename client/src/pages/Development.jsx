@@ -208,7 +208,30 @@ function Development() {
             <h2 className="d-none d-lg-block z-0">
               <span>Featured Projects</span>
             </h2>
+            <motion.div
+              initial={{ opacity: 0, x: "-100%" }}
+              transition={{ duration: 1.5 }}
+              whileInView={{ opacity: 1, x: 0 }}
+            >
+              <p>
+                Explore a dynamic showcase of my featured projects, where each
+                one tells a unique story of creativity and innovation. <br />{" "}
+                Some projects, though not actively live, stand as a testament to
+                the journey and evolution of my skills. <br /> A few are
+                currently undergoing development, representing the ongoing
+                commitment to pushing boundaries. <br />
+                Additionally, some have entered maintenance mode, highlighting
+                the dedication to sustainable and reliable solutions. <br />
+                Throughout these endeavors, I've seamlessly navigated various
+                programming languages, demonstrating versatility in both
+                frontend and backend development. <br />
+                While not all projects are commercial ventures, each holds value
+                as a testament to my proficiency and passion for crafting
+                impactful digital experiences.
+              </p>
+            </motion.div>
           </div>
+
           {projects.map((project) => (
             <Link
               key={project.id}
@@ -218,7 +241,7 @@ function Development() {
               <motion.div
                 transition={{ duration: 2.5 }}
                 whileInView={{
-                  backgroundColor: rgbaColor(project.colorCode, 0.2),
+                  backgroundColor: rgbaColor(project.colorCode, 0.4),
                 }}
                 className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
               >

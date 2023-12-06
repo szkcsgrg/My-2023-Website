@@ -14,10 +14,21 @@ function Photography() {
         <h2 className="d-none d-lg-block z-0">
           <span>Photography</span>
         </h2>
-        <p>
-          Sadly, this part of the website is still under construction. <br />{" "}
-          Please come back to this page later!
-        </p>
+        <div>
+          <h3>Exciting Developments in Progress!</h3>
+          <p>
+            I am working hard behind the scenes to bring you something amazing.{" "}
+            <br />
+            Stay tuned for updates, and thank you for your patience!
+            <br />
+            <br />
+            In the meantime, you can visit my{" "}
+            <a href="https://www.instagram.com/szkcsgrg.raw/" target="_blank">
+              Instagram
+            </a>{" "}
+            profile where I post regularly some of my favorite photos.
+          </p>
+        </div>
       </motion.section>
     </>
   );
