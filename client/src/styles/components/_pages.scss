@@ -40,6 +40,13 @@
   background-color: colors.$secondary;
   cursor: pointer;
 }
+.section-longer-nc {
+  height: auto;
+  position: relative;
+  text-decoration: none;
+  color: colors.$main;
+  background-color: colors.$secondary;
+}
 .section-shorter {
   background-color: colors.$main;
   color: colors.$secondary;
@@ -95,10 +102,20 @@
 .rep-image {
   width: 80%;
   position: relative;
+  filter: drop-shadow(4px 4px 10px #000000);
+}
+@media screen and (max-width: 768px) {
+  .rep-image {
+    width: 100%;
+    filter: drop-shadow(4px 4px 10px #000000);
+  }
 }
 .project-container {
   cursor: default;
 }
 .cursor-default {
   cursor: default;
+}
+.featured-projecs {
+  background-color: #ece6dd;
 }

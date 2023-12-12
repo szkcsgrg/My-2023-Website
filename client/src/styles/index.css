@@ -12,11 +12,15 @@ body {
   overflow-x: hidden;
 }
 
+/*
+.background {
+  background-image: url("../assets/utils/BackgroundTopographicMap.png"); 
+}
+*/
 .dark ::-moz-selection {
   background: #f3f3f3;
   color: #232323;
 }
-
 .dark ::selection {
   background: #f3f3f3;
   color: #232323;
@@ -396,6 +400,14 @@ textarea {
   cursor: pointer;
 }
 
+.section-longer-nc {
+  height: auto;
+  position: relative;
+  text-decoration: none;
+  color: #232323;
+  background-color: #f3f3f3;
+}
+
 .section-shorter {
   background-color: #232323;
   color: #f3f3f3;
@@ -455,14 +467,25 @@ textarea {
 .rep-image {
   width: 80%;
   position: relative;
+  filter: drop-shadow(4px 4px 10px #000000);
 }
 
+@media screen and (max-width: 768px) {
+  .rep-image {
+    width: 100%;
+    filter: drop-shadow(4px 4px 10px #000000);
+  }
+}
 .project-container {
   cursor: default;
 }
 
 .cursor-default {
   cursor: default;
+}
+
+.featured-projecs {
+  background-color: #ece6dd;
 }
 
 .cursor {

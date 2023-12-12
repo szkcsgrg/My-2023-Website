@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import profile from "../assets/utils/Profile.png";
 
 function Home() {
-  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
+  const CV = `${process.env.REACT_APP_BACKEND_SERVER}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
 
   return (
-    <article>
+    <article className="background">
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -51,11 +51,7 @@ function Home() {
         whileInView={{ opacity: 1, x: 0 }}
         className="section row d-flex flex-row flex-md-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <Link
-          to="/development"
-          // onMouseEnter={developmentEnter}
-          // onMouseLeave={developmentExit}
-        >
+        <Link to="/development">
           <h2 className="z-1 m-0">Software Development</h2>
           <h2 className="d-none d-lg-block z-0">
             <span>Software Development</span>

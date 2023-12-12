@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectFade, Scrollbar, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-
 import { darkEnter, darkExit } from "../components/cursor";
 
 function Development() {
+  const CV = `${process.env.REACT_APP_BACKEND_SERVER}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
   //Get all the rows from the database.
   const [reviews, setReviews] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -18,7 +18,9 @@ function Development() {
     //Async fucntion is needed to communicate with the backend.
     const fecthAllReviews = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/reviews");
+        const res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_SERVER}:8800/reviews`
+        );
         setReviews(res.data);
       } catch (error) {
         console.log(error);
@@ -28,7 +30,7 @@ function Development() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/projectsdevelopment"
+          `${process.env.REACT_APP_BACKEND_SERVER}:8800/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -92,8 +94,6 @@ function Development() {
 
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   };
-
-  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
   return (
     <>
       <motion.section
@@ -208,7 +208,30 @@ function Development() {
             <h2 className="d-none d-lg-block z-0">
               <span>Featured Projects</span>
             </h2>
+            <motion.div
+              initial={{ opacity: 0, x: "-100%" }}
+              transition={{ duration: 1.5 }}
+              whileInView={{ opacity: 1, x: 0 }}
+            >
+              <p>
+                Explore a dynamic showcase of my featured projects, where each
+                one tells a unique story of creativity and innovation. <br />{" "}
+                Some projects, though not actively live, stand as a testament to
+                the journey and evolution of my skills. <br /> A few are
+                currently undergoing development, representing the ongoing
+                commitment to pushing boundaries. <br />
+                Additionally, some have entered maintenance mode, highlighting
+                the dedication to sustainable and reliable solutions. <br />
+                Throughout these endeavors, I've seamlessly navigated various
+                programming languages, demonstrating versatility in both
+                frontend and backend development. <br />
+                While not all projects are commercial ventures, each holds value
+                as a testament to my proficiency and passion for crafting
+                impactful digital experiences.
+              </p>
+            </motion.div>
           </div>
+
           {projects.map((project) => (
             <Link
               key={project.id}
@@ -218,7 +241,7 @@ function Development() {
               <motion.div
                 transition={{ duration: 2.5 }}
                 whileInView={{
-                  backgroundColor: rgbaColor(project.colorCode, 0.2),
+                  backgroundColor: rgbaColor(project.colorCode, 0.4),
                 }}
                 className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
               >
@@ -249,7 +272,7 @@ function Development() {
                 >
                   <img
                     className="img-thumbnail border-0 project-thumbnail"
-                    src={`http://localhost:8800/${project.image1}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image1}`}
                     alt="Thumbnail of the project"
                   />
                 </motion.div>

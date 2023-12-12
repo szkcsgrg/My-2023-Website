@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-// import TestImage from "../assets/utils/test.webp";
 
 let developmentEnter,
   developmentExit,
