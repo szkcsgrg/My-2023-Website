@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import profile from "../assets/utils/Profile.png";
 
 function Home() {
-  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  const CV = `${backendServer}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
 
   return (
     <article>

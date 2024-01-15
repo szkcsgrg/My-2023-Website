@@ -4,6 +4,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function DeveloperAdd() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
+
   //Check if there is any User
   const [user, setUser] = useState();
   useEffect(() => {
@@ -93,7 +96,7 @@ function DeveloperAdd() {
       formData.append("image4", image4);
 
       const response = await axios.post(
-        "http://localhost:8800/developerprojects",
+        `${backendServer}:8800/developerprojects`,
         formData
       );
       if (response.status === 200) {

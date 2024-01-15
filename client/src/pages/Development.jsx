@@ -10,6 +10,8 @@ import "swiper/css/effect-fade";
 import { darkEnter, darkExit } from "../components/cursor";
 
 function Development() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
   //Get all the rows from the database.
   const [reviews, setReviews] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -18,7 +20,7 @@ function Development() {
     //Async fucntion is needed to communicate with the backend.
     const fecthAllReviews = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/reviews");
+        const res = await axios.get(`${backendServer}:8800/reviews`);
         setReviews(res.data);
       } catch (error) {
         console.log(error);
@@ -28,7 +30,7 @@ function Development() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/projectsdevelopment"
+          `${backendServer}:8800/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -93,7 +95,7 @@ function Development() {
     return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   };
 
-  const CV = "http://localhost:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf";
+  const CV = `${backendServer}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
   return (
     <>
       <motion.section
@@ -249,7 +251,7 @@ function Development() {
                 >
                   <img
                     className="img-thumbnail border-0 project-thumbnail"
-                    src={`http://localhost:8800/${project.image1}`}
+                    src={`${backendServer}:8800/${project.image1}`}
                     alt="Thumbnail of the project"
                   />
                 </motion.div>

@@ -4,6 +4,9 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function DeveloperEdit() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
+
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -39,7 +42,7 @@ function DeveloperEdit() {
     const fetchOneProject = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/projectsdevelopment/" + id
+          `${backendServer}:8800/projectsdevelopment/` + id
         );
         setSelectedProject(res.data[0]);
         setUpdatedProject({
@@ -149,7 +152,7 @@ function DeveloperEdit() {
       formData.append("image3", image3);
       formData.append("image4", image4);
       await axios.put(
-        "http://localhost:8800/updateDeveloperProject/" + id,
+        `${backendServer}:8800/updateDeveloperProject/` + id,
         formData
       );
       navigate("/login");

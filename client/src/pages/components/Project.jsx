@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import { projectEnter, projectExit } from "../../components/cursor";
 
 function Project() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
   const { id } = useParams();
   const [project, setProject] = useState(null);
 
@@ -13,7 +15,7 @@ function Project() {
     const fetchProject = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8800/projectsdevelopment/` + id
+          `${backendServer}:8800/projectsdevelopment/` + id
         );
         setProject(res.data[0]);
       } catch (error) {
@@ -32,7 +34,7 @@ function Project() {
     );
   }
   const parallax1 = {
-    backgroundImage: `url("http://localhost:8800/${project.image2}")`,
+    backgroundImage: `url("${backendServer}:8800/${project.image2}")`,
   };
 
   const MarkdownWithCustomStyles = ({ markdownContent, colorCode }) => {
@@ -135,14 +137,14 @@ function Project() {
           <img
             className="rep-image text-center"
             alt="UI element"
-            src={`http://localhost:8800/${project.image3}`}
+            src={`${backendServer}:8800/${project.image3}`}
           />
         </div>
         <div className="col-10 col-md-6 mt-lg-5 mt-0 text-center">
           <img
             alt="UI element"
             className="rep-image text-center"
-            src={`http://localhost:8800/${project.image4}`}
+            src={`${backendServer}:8800/${project.image4}`}
           />
         </div>
       </section>

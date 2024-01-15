@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
+
   //Get all the rows from the database.
   const [projects, setProjects] = useState([]);
 
@@ -12,7 +15,7 @@ function Dashboard() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8800/projectsdevelopment"
+          `${backendServer}:8800/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -26,7 +29,7 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/developerprojects/` + id);
+      await axios.delete(`${backendServer}:8800/developerprojects/` + id);
       window.location.reload();
       //setProjects(projects.filter((project) => project.id !== id));
     } catch (error) {
@@ -41,7 +44,7 @@ function Dashboard() {
       const formData = new FormData();
       formData.append("cv", e.target.files[0]);
 
-      const response = await axios.post("http://localhost:8800/cv", formData);
+      const response = await axios.post(`${backendServer}/cv`, formData);
       if (response.status === 200) {
         console.log("CV has been successfully uploaded.");
         navigate("/login");
