@@ -1,7 +1,9 @@
+
 //////////////////////////////////////////////////////////////////////////////
 //Server Imports & Configuration
 //////////////////////////////////////////////////////////////////////////////
 const express = require("express");
+const https = require('https');
 const mysql = require("mysql2");
 const cors = require("cors");
 const multer = require("multer");
@@ -10,23 +12,74 @@ const fs = require("fs");
 require("dotenv").config();
 
 //Server configuration
-const app = express();
 const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE_DATABASE,
+  host: "91.227.139.203",
+  //host: "vps.szakacsgergo.com",
+  user: "c15224szkcsgrg",
+  password: "DBPW0312",
+  database: "c15224my2023website",
+  port: 3306,
+//  database: process.env.DATABASE_DATABASE,
+});
+
+const app = express();
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/vps.szakacsgergo.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/vps.szakacsgergo.com/fullchain.pem')
+};
+const httpsServer = https.createServer(options, app);
+
+httpsServer.keepAliveTimeout = 315360000;
+
+const port =  8800;
+httpsServer.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+
+app.get('/', (req, res) => {
+  res.send('Hello, HTTPS!');
 });
 
 app.use(express.json());
-app.use(cors());
 app.set("view engine", "ejs");
 
+//Cors setup
+const allowedOrigins = ['https://szakacsgergo.com',
+  'https://www.szakacsgergo.com',
+  'https://szakacsgergo.com/login',
+  'https://www.szakacsgergo.com/login',
+  'https://szakacsgergo.com/development',
+  'https://www.szakacsgergo.com/development',
+  'https://szakacsgergo.com/photography',
+  'https://www.szakacsgergo.com/photography',
+  'https://szakacsgergo.com/project',
+  'https://www.szakacsgergo.com/project', ];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      console.error(`CORS Error: Origin '${origin}' is not allowed.`);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+
+
+
+//File handeling
 app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/public/images", express.static("public/images"));
 const storage = multer.diskStorage({
   destination: (reg, file, cb) => {
     cb(null, "public/images");
+
   },
   filename: (reg, file, cb) => {
     cb(
@@ -35,6 +88,7 @@ const storage = multer.diskStorage({
     );
   },
 });
+
 
 const upload = multer({
   storage: storage,
@@ -112,8 +166,11 @@ app.post(
     { name: "image4" },
   ]),
   (req, res) => {
-    //console.log(req.body);
-    //console.log(req.files.image1[0].path);
+    console.log(req.body);
+    console.log(req.files.image1[0].path);
+    console.log(req.files.image2[0].path);
+    console.log(req.files.image3[0].path);
+    console.log(req.files.image4[0].path);
     const q = `INSERT INTO ProjectsDevelopment (name, dateStart, stack, description1, description2, image1, image2, image3, image4, colorCode, href1, href2, developmentType, position, dateEnd, reviewWriter, reviewText) VALUES (?)`;
     const values = [
       req.body.name,
@@ -134,6 +191,7 @@ app.post(
       req.body.reviewWriter || null,
       req.body.reviewText || null,
     ];
+console.log(values);
     const sanitizedValues = values.map((value) =>
       value === "undefined" ? null : value
     );
@@ -292,10 +350,3 @@ app.put(
   }
 );
 
-////////////////////////////////////////////////////////////////
-//Server listening.
-////////////////////////////////////////////////////////////////
-
-app.listen(8800, () => {
-  console.log("Server running on port 8800");
-});
