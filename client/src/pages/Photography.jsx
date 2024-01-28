@@ -11,9 +11,6 @@ function Photography() {
         className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">Photography</h2>
-        <h2 className="d-none d-lg-block z-0">
-          <span>Photography</span>
-        </h2>
         <div>
           <h3>Exciting Developments in Progress!</h3>
           <p>
@@ -29,18 +26,6 @@ function Photography() {
             profile where I post regularly some of my favorite photos.
           </p>
         </div>
-      </motion.section>
-      <motion.section
-        initial={{ opacity: 0, y: "100%" }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-        whileInView={{ y: 0 }}
-        className="section-longer row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
-      >
-        <h2 className="z-1">Portraits</h2>
-        <h2 className="d-none d-lg-block z-0">
-          <span>Photography</span>
-        </h2>
       </motion.section>
     </>
   );

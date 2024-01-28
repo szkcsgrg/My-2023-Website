@@ -3,7 +3,7 @@ html,
 body {
   scroll-behavior: smooth;
   scroll-padding-top: 10em;
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -51,6 +51,7 @@ h2 {
   font-size: calc(100% + 2.4vw + 2.4vh);
   position: relative;
   margin: 0;
+  margin-bottom: 0.1em;
 }
 h2 span {
   font-family: "Kanit", sans-serif;
@@ -98,7 +99,7 @@ h4 span {
 }
 
 header p {
-  font-family: "Kanit", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 p {
@@ -308,7 +309,7 @@ textarea {
 }
 
 .description {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
   margin: 0;
@@ -316,7 +317,7 @@ textarea {
 }
 .description pre,
 .description ReactMarkdown {
-  font-family: "Roboto", sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
   white-space: pre-wrap;

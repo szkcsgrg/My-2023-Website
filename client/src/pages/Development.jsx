@@ -103,9 +103,6 @@ function Development() {
         className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <h2 className="z-1">Software Development</h2>
-        <h2 className="d-none d-lg-block z-0">
-          <span>Software Development</span>
-        </h2>
       </motion.section>
       {/* Overview */}
       <section className="section-longer row d-flex flex-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5">

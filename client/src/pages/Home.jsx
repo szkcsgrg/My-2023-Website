@@ -52,10 +52,7 @@ function Home() {
         className="section row d-flex flex-row flex-md-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
         <Link to="/development">
-          <h2 className="z-1 m-0">Software Development</h2>
-          <h2 className="d-none d-lg-block z-0">
-            <span>Software Development</span>
-          </h2>
+          <h2 className="z-1">Software Development</h2>
           <p>
             After learning the basics of Programming, I met with the lovely HTML
             and CSS. At first view, I know they will be the one. Throughout my
@@ -77,9 +74,6 @@ function Home() {
       >
         <h2 className="z-1">
           <Link to="/photography">Photography</Link>
-        </h2>
-        <h2 className="d-none d-lg-block z-0">
-          <span>Photography</span>
         </h2>
         <p>
           The other passion is in connection with art. Since I know myself, I
