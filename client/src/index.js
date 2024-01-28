@@ -23,6 +23,7 @@ import Development from "./pages/Development";
 import Project from "./pages/components/Project";
 import DeveloperAdd from "./pages/components/DeveloperAdd";
 import DeveloperEdit from "./pages/components/DeveloperEdit";
+import PhotoAdd from "./pages/components/PhotoAdd";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -80,14 +81,7 @@ const router = createBrowserRouter([
       { path: "/project/:id", element: <Project /> },
       { path: "/addDeveloperProject", element: <DeveloperAdd /> },
       { path: "/updateDeveloperProject/:id", element: <DeveloperEdit /> },
-
-      /*
-       * IMPORTANT NOTE
-       * Get Values
-       * Create new path, based on database records.
-       * Import Values to the path component.
-       * Process: get Values from DB, then create new path. Open project component pass the values with the correct values.
-       */
+      { path: "/addPhoto/", element: <PhotoAdd /> },
     ],
   },
 ]);

@@ -9,7 +9,6 @@ function Dashboard() {
 
   //Get all the rows from the database.
   const [projects, setProjects] = useState([]);
-
   useEffect(() => {
     //Async fucntion is needed to communicate with the backend.
     const fecthAllProjects = async () => {
@@ -57,6 +56,41 @@ function Dashboard() {
       } else {
         console.log("Error: ", error);
       }
+    }
+  };
+
+  //----------------------------------------------------------------//
+
+  const [photos, setPhotos] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("portraits"); // Initial default value
+
+  useEffect(() => {
+    // Async function is needed to communicate with the backend.
+    const fetchPhotosByOption = async () => {
+      try {
+        const res = await axios.get(
+          `${backendServer}:8800/photos/${selectedOption}`
+        );
+        setPhotos(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Call the function initially and whenever the selected option changes.
+    fetchPhotosByOption();
+  }, [selectedOption]);
+
+  // Handle dropdown change
+  const handleDropdownChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const handleDeletePhoto = async (id) => {
+    try {
+      await axios.delete(`${backendServer}:8800/photography/` + id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -127,6 +161,38 @@ function Dashboard() {
       </div>
       <div className="section d-flex justify-content-center flex-column col-12">
         <h2>Photography - Section</h2>
+        <div className="d-flex gap-3 my-2 mb-4">
+          <button className="col-6 col-lg-2 button">
+            <Link to={"/addPhoto"}>Add New Photo</Link>
+          </button>
+          <select
+            name="options"
+            id="dropdown"
+            value={selectedOption}
+            onChange={handleDropdownChange}
+          >
+            <option value="portraits">Portraits</option>
+            <option value="weddings">Weddings</option>
+            <option value="products">Products</option>
+            <option value="lifestyle">Lifestyle</option>
+          </select>
+        </div>
+
+        <div>
+          {photos.map((photo) => (
+            <div
+              onClick={() => handleDeletePhoto(photo.id)}
+              key={photo.id}
+              className="dashboard-image"
+            >
+              <img
+                className="dashboard-image"
+                src={`${backendServer}:8800/${photo.path}`}
+                alt={photo.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

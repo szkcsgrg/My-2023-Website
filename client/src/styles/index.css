@@ -32,10 +32,6 @@ body {
   color: #f3f3f3;
 }
 
-.row {
-  --bs-gutter-x: 0;
-}
-
 h1 {
   font-family: "Raleway", sans-serif;
   font-size: calc(100% + 1.8vw + 1.8vh);
@@ -274,6 +270,12 @@ thead {
   border-bottom: 3px solid #d7942d;
 }
 
+#dropdown {
+  border: none;
+  background-color: #f3f3f3;
+  border-bottom: 3px solid #d7942d;
+}
+
 input {
   border: none;
   background-color: #f3f3f3;
@@ -423,6 +425,20 @@ textarea {
   text-decoration: none;
 }
 
+.slider {
+  overflow-x: hidden;
+  height: auto;
+  min-height: 100svh;
+  position: relative;
+  text-decoration: none;
+  color: #232323;
+  transition: background-color 0.5s ease;
+}
+.slider a,
+.slider link {
+  text-decoration: none;
+}
+
 .project-thumbnail {
   box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.3);
   padding: 0;
@@ -431,14 +447,22 @@ textarea {
 }
 
 .swiper {
-  --bs-gutter-x: 1.5rem;
   margin-left: 0;
   margin-right: 0;
 }
 .swiper .swiper-wrapper {
-  --bs-gutter-x: 1.5rem;
   margin-left: 0;
   margin-right: 0;
+}
+
+.swiper-slide-custom {
+  height: 80svh;
+}
+.swiper-slide-custom img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 90svw;
+  image-rendering: optimizeSpeed;
 }
 
 .parallax {
@@ -463,6 +487,11 @@ textarea {
 
 .cursor-default {
   cursor: default;
+}
+
+.dashboard-image {
+  width: 45%;
+  image-rendering: optimizeSpeed;
 }
 
 .cursor {

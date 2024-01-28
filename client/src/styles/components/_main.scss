@@ -25,9 +25,9 @@ body {
   background: colors.$main;
   color: colors.$secondary;
 }
-.row {
-  --bs-gutter-x: 0;
-}
+// .row {
+//   //--bs-gutter-x: rem;
+// }
 
 h1 {
   font-family: "Raleway", sans-serif;
@@ -246,6 +246,11 @@ button:active {
 }
 
 thead {
+  border-bottom: 3px solid colors.$accent;
+}
+#dropdown {
+  border: none;
+  background-color: colors.$secondary;
   border-bottom: 3px solid colors.$accent;
 }
 

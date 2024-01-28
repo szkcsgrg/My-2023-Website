@@ -3,7 +3,13 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Scrollbar, A11y } from "swiper/modules";
+import {
+  Navigation,
+  EffectFade,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
 
@@ -179,10 +185,12 @@ function Development() {
           </h3>
 
           <Swiper
-            modules={[Navigation, Scrollbar, A11y, EffectFade]}
+            modules={[Navigation, Scrollbar, A11y, EffectFade, Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
             navigation
+            loop={true}
+            autoplay={{ delay: 15000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             loopPreventsSliding={false}
