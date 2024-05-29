@@ -141,14 +141,7 @@ function Development() {
             facet of my development approach.
           </motion.p>
         </div>
-        <br />
-        <br />
-        <p>
-          <span>From coding to creativity, I've got you covered.</span>
-        </p>
-        <br />
-        <br />
-        <p className="smaller-text" id="contact">
+        <p className="smaller-text mt-5" id="contact">
           Currently seeking new opportunities, I'm excited to contribute my
           skills to your next project. <br /> Feel free to reach out at{" "}
           <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
@@ -160,6 +153,7 @@ function Development() {
           for more details.
         </p>
       </section>
+
       {/* Reviews */}
       <section
         id="reviews"
@@ -205,28 +199,6 @@ function Development() {
             <h2 className="d-none d-lg-block z-0">
               <span>Featured Projects</span>
             </h2>
-            <motion.div
-              initial={{ opacity: 0, x: "-100%" }}
-              transition={{ duration: 1.5 }}
-              whileInView={{ opacity: 1, x: 0 }}
-            >
-              <p>
-                Explore a dynamic showcase of my featured projects, where each
-                one tells a unique story of creativity and innovation. <br />{" "}
-                Some projects, though not actively live, stand as a testament to
-                the journey and evolution of my skills. <br /> A few are
-                currently undergoing development, representing the ongoing
-                commitment to pushing boundaries. <br />
-                Additionally, some have entered maintenance mode, highlighting
-                the dedication to sustainable and reliable solutions. <br />
-                Throughout these endeavors, I've seamlessly navigated various
-                programming languages, demonstrating versatility in both
-                frontend and backend development. <br />
-                While not all projects are commercial ventures, each holds value
-                as a testament to my proficiency and passion for crafting
-                impactful digital experiences.
-              </p>
-            </motion.div>
           </div>
 
           {projects.map((project) => (
@@ -251,13 +223,20 @@ function Development() {
                   <div className="justify-content-end">
                     <h3 className="z-2">{project.name}</h3>
                     <p>
-                      <span>{project.stack}</span>
+                      <motion.span
+                        className="bold"
+                        whileInView={{
+                          color: rgbaColor(project.colorCode, 1),
+                        }}
+                      >
+                        {project.stack}
+                      </motion.span>
                       <br />
-                      <span>
+                      <span className="italic">
                         {project.dateStart}-{project.dateEnd}
                       </span>
                       <br />
-                      <span>{project.developmentType}</span>
+                      <span className="italic">{project.developmentType}</span>
                     </p>
                   </div>
                 </motion.div>

@@ -61,7 +61,7 @@
 .project {
   overflow-x: hidden;
   height: auto;
-  min-height: 100svh;
+  min-height: 80svh;
   position: relative;
   text-decoration: none;
   color: colors.$main;
@@ -118,4 +118,16 @@
 }
 .featured-projecs {
   background-color: #ece6dd;
+}
+.landing {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.bold {
+  font-weight: 500;
+}
+.italic {
+  font-weight: 300;
+  font-style: italic;
 }

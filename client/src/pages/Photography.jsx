@@ -10,7 +10,7 @@ function Photography() {
         transition={{ duration: 1.5 }}
         className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <h2 className="z-1">Photography</h2>
+        <h2 className="z-1 my-5">Photography</h2>
         <div>
           <h3>Exciting Developments in Progress!</h3>
           <p>
@@ -20,7 +20,11 @@ function Photography() {
             <br />
             <br />
             In the meantime, you can visit my{" "}
-            <a href="https://www.instagram.com/szkcsgrg.raw/" target="_blank">
+            <a
+              href="https://www.instagram.com/szkcsgrg.raw/"
+              target="_blank"
+              rel="noreferrer"
+            >
               Instagram
             </a>{" "}
             profile where I post regularly some of my favorite photos.

@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html,
 body {
   scroll-behavior: smooth;
   scroll-padding-top: 10em;
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -41,13 +42,15 @@ body {
 }
 
 h1 {
-  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-size: calc(100% + 1.8vw + 1.8vh);
   margin: 0;
 }
 
 h2 {
-  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-size: calc(100% + 2.4vw + 2.4vh);
   position: relative;
   margin: 0;
@@ -69,7 +72,8 @@ h2 a {
 }
 
 h3 {
-  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-size: calc(100% + 1.5vw + 1.5vh);
   margin: 0;
 }
@@ -99,17 +103,17 @@ h4 span {
 }
 
 header p {
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
 }
 
 p {
   font-size: calc(100% + 0.3vw + 0.3vh);
-  font-weight: 300;
+  font-weight: 200;
   margin: 0;
   padding: 0;
 }
 p span {
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-weight: 500;
   color: rgba(35, 35, 35, 0.3137254902);
   margin: 0;
@@ -119,7 +123,7 @@ p a,
 p link {
   color: #d7942d;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   position: relative;
@@ -136,7 +140,7 @@ p link:focus {
 
 span {
   font-size: calc(100% + 0.2vw + 0.2vh);
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .bigger-text {
@@ -165,16 +169,16 @@ span {
 
 .smaller-text {
   font-size: calc(100% + 0.25vw + 0.25vh);
-  font-weight: 300;
+  font-weight: 200;
 }
 .smaller-text span {
-  font-weight: 300;
+  font-weight: 200;
   color: #d7942d;
 }
 .smaller-text a,
 .smaller-text link {
   text-decoration: none;
-  font-weight: 300;
+  font-weight: 200;
   color: #d7942d;
   padding: 0;
   box-shadow: none;
@@ -195,13 +199,13 @@ span {
 
 .simple-link {
   font-size: calc(100% + 0.3vw + 0.3vh);
-  font-weight: 300;
+  font-weight: 200;
 }
 .simple-link a,
 .simple-link link {
   color: #232323;
   text-decoration: none;
-  font-weight: 300;
+  font-weight: 200;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 }
@@ -309,7 +313,7 @@ textarea {
 }
 
 .description {
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
   margin: 0;
@@ -317,14 +321,14 @@ textarea {
 }
 .description pre,
 .description ReactMarkdown {
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-size: calc(100% + 0.05vw + 0.05vh);
   font-weight: 300;
   white-space: pre-wrap;
   word-wrap: break-word;
 }
 .description span {
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif, sans-serif;
   font-weight: 500;
   color: rgba(35, 35, 35, 0.3137254902);
   margin: 0;
@@ -424,7 +428,7 @@ textarea {
 .project {
   overflow-x: hidden;
   height: auto;
-  min-height: 100svh;
+  min-height: 80svh;
   position: relative;
   text-decoration: none;
   color: #232323;
@@ -487,6 +491,20 @@ textarea {
 
 .featured-projecs {
   background-color: #ece6dd;
+}
+
+.landing {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.italic {
+  font-weight: 300;
+  font-style: italic;
 }
 
 .cursor {
