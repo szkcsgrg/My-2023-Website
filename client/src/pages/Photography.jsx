@@ -9,9 +9,10 @@ function Photography() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
         className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
-      >
+        >
         <h2 className="z-1 my-5">Photography</h2>
-        <div>
+        {/* In Progress */}
+        {/* <div>
           <h3>Exciting Developments in Progress!</h3>
           <p>
             I am working hard behind the scenes to bring you something amazing.{" "}
@@ -29,6 +30,19 @@ function Photography() {
             </a>{" "}
             profile where I post regularly some of my favorite photos.
           </p>
+        </div> */}
+      </motion.section>
+
+      {/* Portraits */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+        className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
+      >
+        <h3 className="z-1 my-5">Portraits</h3>
+        <div>
+          <img src="" alt="" />
         </div>
       </motion.section>
     </>

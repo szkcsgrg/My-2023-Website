@@ -21,7 +21,7 @@ import "swiper/css/effect-fade";
 import { darkEnter, darkExit } from "../components/cursor";
 
 function Development() {
-  const CV = `${process.env.REACT_APP_BACKEND_SERVER}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
+  const CV = `${process.env.REACT_APP_BACKEND_SERVER}/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
   //Get all the rows from the database.
   const [reviews, setReviews] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -31,7 +31,7 @@ function Development() {
     const fecthAllReviews = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}:8800/reviews`
+          `${process.env.REACT_APP_BACKEND_SERVER}/reviews`
         );
         setReviews(res.data);
       } catch (error) {
@@ -42,7 +42,7 @@ function Development() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}:8800/projectsdevelopment`
+          `${process.env.REACT_APP_BACKEND_SERVER}/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -342,7 +342,7 @@ function Development() {
                   >
                     <img
                       className="img-thumbnail border-0 project-thumbnail"
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${project.image1}`}
                       alt="Thumbnail of the project"
                     />
                   </motion.div>
