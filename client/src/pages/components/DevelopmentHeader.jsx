@@ -10,7 +10,7 @@ function DevelopmentHeader() {
       onMouseLeave={headerExit}
       className="z-3 py-2 top-0 position-fixed d-flex flex-row row w-100"
     >
-      <div className="d-flex flex-row col-6 px-3 px-lg-5 py-lg-3">
+      <div className="d-flex flex-row col-6 px-2 px-lg-5 py-lg-3">
         <p className="no-effect-link logo">
           <Link to="/">Gergő Szakács</Link>
         </p>

@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Scrollbar, A11y } from "swiper/modules";
+import {
+  Autoplay,
+  Pagination,
+  Navigation,
+  EffectFade,
+  Scrollbar,
+  A11y,
+  FreeMode,
+} from "swiper/modules";
 import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/effect-fade";
+
 import { darkEnter, darkExit } from "../components/cursor";
 
 function Development() {
@@ -42,6 +54,11 @@ function Development() {
     fecthAllReviews();
     fecthAllProjects();
   }, []);
+
+  const goToTop = () => {
+    console.log("goToTop function called");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,13 +117,14 @@ function Development() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
-        className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="section row d-flex flex-column justify-content-center m-0 p-2 m-md-3 p-md-3 mx-lg-5 px-lg-5"
       >
         <h2 className="z-1">Software Development</h2>
       </motion.section>
+
       {/* Overview */}
-      <section className="section-longer row d-flex flex-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5">
-        <div className="d-flex flex-column flex-lg-row gap-3">
+      <section className="section-longer row d-flex flex-column m-0 p-2 m-md-3 p-md-3 mx-lg-5 px-lg-5">
+        <div className="d-flex flex-column flex-lg-row gap-3 info">
           <motion.div
             initial={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 1.5 }}
@@ -115,17 +133,90 @@ function Development() {
           >
             <h3>Short Overview</h3>
             <p>
-              I'm a Junior website developer with a passion for crafting
-              seamless online experiences. <br />
-              My journey began with an oriented matura in Computer Science,
-              further solidified by a Certificate as a Software Developer
+              I'm a website developer with a passion for crafting seamless
+              online experiences. My journey began with an oriented matura in
+              Computer Science, further solidified by a Certificate as a
+              Software Developer.
+              <br />
+              <Link to="mailto:work@szakacsgergo.com">
+                work@szakacsgergo.com
+              </Link>
+              <br />
+              <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>
             </p>
+            <button className="click mt-1 mt-lg-2 me-3">
+              <a href="#projects">Projects</a>
+            </button>
+            <a
+              className="click bigger-accent"
+              target="_blank"
+              rel="noreferrer"
+              href={CV}
+            >
+              Resume
+            </a>
           </motion.div>
-          <motion.p
+          {reviews[0] ? (
+            <motion.section
+              initial={{ opacity: 0, x: "100%" }}
+              transition={{ duration: 1.5 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="col-lg-8 margin-top-075 p-2 py-3 p-md-3 p-lg-5 section-shorter dark"
+              id="reviews"
+              onMouseEnter={darkEnter}
+              onMouseLeave={darkExit}
+            >
+              <h3 className="z-2 mb-2">Reviews</h3>
+              <Swiper
+                modules={[
+                  Autoplay,
+                  Pagination,
+                  Navigation,
+                  Scrollbar,
+                  A11y,
+                  EffectFade,
+                  FreeMode,
+                ]}
+                spaceBetween={50}
+                slidesPerView={1}
+                grabCursor={true}
+                //freeMode={true}
+                // pagination={{
+                //   clickable: true,
+                // }}
+                // navigation={true}
+                autoplay={{
+                  delay: 15000,
+                  disableOnInteraction: true,
+                }}
+                loop={true}
+                scrollbar={{ draggable: true }}
+                loopPreventsSliding={false}
+              >
+                {reviews.map((review) => {
+                  if (review.reviewWriter) {
+                    return (
+                      <SwiperSlide key={review.id}>
+                        <p className="bold">{review.reviewWriter}</p>
+                        <q className="smaller-text italic">
+                          {review.reviewText}
+                        </q>
+                      </SwiperSlide>
+                    );
+                  }
+                  return null;
+                })}
+              </Swiper>
+            </motion.section>
+          ) : (
+            <></>
+          )}
+
+          {/* <motion.p
             initial={{ opacity: 0, x: "100%" }}
             transition={{ duration: 1.5 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="col-lg-8 smaller-text margin-top-075"
+            className="col-lg-8 margin-top-075"
           >
             With an eye for design and a knack for problem-solving, I've
             embarked on diverse projects that bring imagination to life. You can
@@ -139,23 +230,12 @@ function Development() {
             extraordinary heights. This multifaceted experience has equipped me
             with adaptability and a holistic perspective that enriches every
             facet of my development approach.
-          </motion.p>
+          </motion.p> */}
         </div>
-        <p className="smaller-text mt-5" id="contact">
-          Currently seeking new opportunities, I'm excited to contribute my
-          skills to your next project. <br /> Feel free to reach out at{" "}
-          <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
-          or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
-          For a comprehensive look, feel free to access my{" "}
-          <a target="_blank" rel="noreferrer" href={CV}>
-            CV
-          </a>{" "}
-          for more details.
-        </p>
       </section>
 
       {/* Reviews */}
-      <section
+      {/* <section
         id="reviews"
         className="section-shorter dark"
         onMouseEnter={darkEnter}
@@ -168,10 +248,14 @@ function Development() {
           </h3>
 
           <Swiper
-            modules={[Navigation, Scrollbar, A11y, EffectFade]}
+            modules={[Autoplay, Navigation, Scrollbar, A11y, EffectFade]}
             spaceBetween={50}
             slidesPerView={1}
             navigation
+            autoplay={{
+              delay: 15000,
+              disableOnInteraction: true,
+            }}
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             loopPreventsSliding={false}
@@ -189,74 +273,90 @@ function Development() {
             })}
           </Swiper>
         </div>
-      </section>
+      </section> */}
 
       {/* Projects */}
-      <section className="section-longer" id="projects">
-        <div className="row d-flex flex-column m-0 p-0">
-          <div className=" py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
-            <h2 className="z-1 my-3 my-lg-0 p-2">Featured Projects</h2>
-            <h2 className="d-none d-lg-block z-0">
-              <span>Featured Projects</span>
-            </h2>
-          </div>
-
-          {projects.map((project) => (
-            <Link
-              key={project.id}
-              to={`/project/${project.id}`}
-              className="text-dec-none"
+      {projects[0] ? (
+        <section className="section-longer mt-0 mt-md-5" id="projects">
+          <div className="row d-flex flex-column m-0 p-0">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2.5 }}
+              className="py-3 p-md-3 p-lg-5 project-bg info"
             >
-              <motion.div
-                transition={{ duration: 2.5 }}
-                whileInView={{
-                  backgroundColor: rgbaColor(project.colorCode, 0.4),
-                }}
-                className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
+              <h2 className="z-1 my-3 my-lg-0 p-2">Featured Projects</h2>
+              <h2 className="d-none d-lg-block z-0">
+                <span>Featured Projects</span>
+              </h2>
+            </motion.div>
+
+            {projects.map((project) => (
+              <Link
+                key={project.id}
+                to={`/project/${project.id}`}
+                className="text-dec-none"
               >
                 <motion.div
-                  initial={{ x: "-100%" }}
-                  transition={{ duration: 1.5 }}
-                  whileInView={{ x: 0 }}
-                  className="col-12 col-md-5 offset-md-1 d-flex flex-column px-3 pt-5 pt-md-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 2.5 }}
+                  whileInView={{
+                    backgroundColor: rgbaColor(project.colorCode, 0.4),
+                  }}
+                  className="project d-flex flex-column flex-md-row align-items-center justify-content-center gap-5"
                 >
-                  <div className="justify-content-end">
-                    <h3 className="z-2">{project.name}</h3>
-                    <p>
-                      <motion.span
-                        className="bold"
-                        whileInView={{
-                          color: rgbaColor(project.colorCode, 1),
-                        }}
-                      >
-                        {project.stack}
-                      </motion.span>
-                      <br />
-                      <span className="italic">
-                        {project.dateStart}-{project.dateEnd}
-                      </span>
-                      <br />
-                      <span className="italic">{project.developmentType}</span>
-                    </p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: "-100%" }}
+                    transition={{ duration: 2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="col-12 col-md-5 offset-md-1 d-flex flex-column px-3 pt-5 pt-md-0"
+                  >
+                    <div className="justify-content-end">
+                      <h3 className="z-2">{project.name}</h3>
+                      <p>
+                        <motion.span
+                          className="bold"
+                          whileInView={{
+                            color: rgbaColor(project.colorCode, 1),
+                          }}
+                        >
+                          {project.stack}
+                        </motion.span>
+                        <br />
+                        <span className="italic">
+                          {project.dateStart}-{project.dateEnd}
+                        </span>
+                        <br />
+                        <span className="italic">
+                          {project.developmentType}
+                        </span>
+                      </p>
+                    </div>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: "-100%" }}
+                    transition={{ duration: 2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="col-12 col-md-5 d-flex justify-content-center justify-content-md-end px-3"
+                  >
+                    <img
+                      className="img-thumbnail border-0 project-thumbnail"
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image1}`}
+                      alt="Thumbnail of the project"
+                    />
+                  </motion.div>
                 </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, x: "100%" }}
-                  transition={{ duration: 1.5 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  className="col-12 col-md-5 d-flex justify-content-end px-3"
-                >
-                  <img
-                    className="img-thumbnail border-0 project-thumbnail"
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image1}`}
-                    alt="Thumbnail of the project"
-                  />
-                </motion.div>
-              </motion.div>
-            </Link>
-          ))}
-        </div>
-      </section>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <></>
+      )}
+      {/* <p onClick={goToTop} className="d-block d-md-none goToTop">
+        Up
+      </p> */}
     </>
   );
 }

@@ -92,12 +92,16 @@ function Project() {
       onMouseEnter={projectEnter}
       onMouseLeave={projectExit}
     >
-      <motion.section
+      <section
         key={project.id}
-        transition={{ duration: 1.5 }}
         className="landing-shorter z-1 d-flex justify-content-center flex-column"
       >
-        <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        >
           <h2 className="z-2">{project.name}</h2>
           <h2 className="d-none d-lg-block z-1">
             <span className="text-truncate">{project.name}</span>
@@ -110,35 +114,54 @@ function Project() {
               {project.dateStart}-{project.dateEnd} {project.developmentType}
             </span>
           </p>
-        </div>
-      </motion.section>
-      <section className="parallax z-0" style={parallax1}></section>
+        </motion.div>
+      </section>
       <motion.section
-        transition={{ duration: 1.5 }}
-        className="section-longer d-flex justify-content-center flex-column"
-      >
-        <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5 cursor-default">
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 2.5 }}
+        className="parallax z-0"
+        style={parallax1}
+      ></motion.section>
+      <motion.section className="section-longer d-flex justify-content-center flex-column">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5 cursor-default"
+        >
           <h3 className="my-2">Project Overview</h3>
-          <p className="description col-12">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="description col-12"
+          >
             <pre>
               <MarkdownWithCustomStyles
                 markdownContent={project.description1}
                 colorCode={project.colorCode}
               />
             </pre>
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </motion.section>
       <section className="section row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-3 p-lg-3 d-flex justify-content-center text-center">
         <div className="col-12 col-md-6 text-center">
-          <img
+          <motion.img
+            initial={{ opacity: 0, x: "-100%" }}
+            whileInView={{ opacity: 1, x: "0%" }}
+            transition={{ duration: 1.5 }}
             className="rep-image text-center"
             alt="UI element"
             src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image3}`}
           />
         </div>
         <div className="col-12 col-md-6 mt-lg-5 mt-0 text-center">
-          <img
+          <motion.img
+            initial={{ opacity: 0, x: "100%" }}
+            whileInView={{ opacity: 1, x: "0%" }}
+            transition={{ duration: 1.5 }}
             alt="UI element"
             className="rep-image text-center"
             src={`${process.env.REACT_APP_BACKEND_SERVER}:8800/${project.image4}`}
@@ -148,20 +171,30 @@ function Project() {
       <section className="section-longer-nc d-flex justify-content-center flex-column">
         <div className="row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-5 p-lg-5">
           <h3 className="my-2">Development Journey</h3>
-          <p className="description col-12">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="description col-12"
+          >
             <pre>
               <MarkdownWithCustomStyles
                 markdownContent={project.description2}
                 colorCode={project.colorCode}
               />
             </pre>
-          </p>
+          </motion.p>
 
           {project.reviewWriter ? (
-            <p className="col-12 my-5">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 2 }}
+              className="col-12 my-5"
+            >
               <h4>{project.reviewWriter}</h4>
               <q>{project.reviewText}</q>
-            </p>
+            </motion.p>
           ) : null}
 
           <p className="d-flex justify-content-evenly justify-content-md-start gap-md-3">

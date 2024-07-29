@@ -38,8 +38,8 @@ function Home() {
             <Link to="mailto:work@szakacsgergo.com">work@szakacsgergo.com</Link>{" "}
             or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
             For a comprehensive look, feel free to access my{" "}
-            <a target="_blank" rel="noreferrer" href={CV}>
-              CV
+            <a className="accent" target="_blank" rel="noreferrer" href={CV}>
+              Resume
             </a>{" "}
             for more details.
           </p>
