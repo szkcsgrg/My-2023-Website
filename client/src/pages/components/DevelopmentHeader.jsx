@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { headerEnter, headerExit } from "../../components/cursor";
 
 function DevelopmentHeader() {
-  const CV = `${process.env.REACT_APP_BACKEND_SERVER}/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
+  const CV = `${process.env.REACT_APP_BACKEND_SERVER}:8800/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
   return (
     <header
       onMouseEnter={headerEnter}

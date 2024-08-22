@@ -39,7 +39,7 @@ function DeveloperEdit() {
     const fetchOneProject = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}/projectsdevelopment/` +
+          `${process.env.REACT_APP_BACKEND_SERVER}:8800/projectsdevelopment/` +
             id
         );
         setSelectedProject(res.data[0]);
@@ -150,7 +150,7 @@ function DeveloperEdit() {
       formData.append("image3", image3);
       formData.append("image4", image4);
       await axios.put(
-        `${process.env.REACT_APP_BACKEND_SERVER}/updateDeveloperProject/` +
+        `${process.env.REACT_APP_BACKEND_SERVER}:8800/updateDeveloperProject/` +
           id,
         formData
       );

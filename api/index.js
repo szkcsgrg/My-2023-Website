@@ -100,19 +100,6 @@ app.get("/projectsdevelopment/:id", (req, res) => {
   );
 });
 
-
-app.get("/photography/:id", (req, res) => {
-  const id = req.params.id;
-  db.query(
-    "SELECT * FROM Photography WHERE (`id` = ?)",
-    [id],
-    (err, result) => {
-      if (err) return res.json(err);
-      return res.json(result);
-    }
-  );
-})
-
 ////////////////////////////////////////////////////////////////
 //Insert into the database.
 ////////////////////////////////////////////////////////////////
@@ -158,45 +145,6 @@ app.post(
     });
   }
 );
-
-app.post("/addPhoto", upload.fields([
-  { name: "cover1" },
-  { name: "cover2" },
-  { name: "cover3" },
-  { name: "image4" },
-  { name: "image5" },
-  { name: "image6" },
-  { name: "image7" },
-  { name: "image8" },
-  { name: "image9" },
-])
-,(req, res) => {
-  console.log(req.body);
-  console.log(req.files);
-  const q = `INSERT INTO Photography (name, topic, cover1, cover2, cover3, image4, image5, image6, image7, image8, image9, clickable, date) VALUES (?)`;
-  const values = [
-    req.body.name, 
-    req.body.topic,
-    req.files.cover1?.[0]?.path || null,
-    req.files.cover2?.[0]?.path || null,
-    req.files.cover3?.[0]?.path || null,
-    req.files.image4?.[0]?.path || null,
-    req.files.image5?.[0]?.path || null,
-    req.files.image6?.[0]?.path || null,
-    req.files.image7?.[0]?.path || null,
-    req.files.image8?.[0]?.path || null,
-    req.files.image9?.[0]?.path || null,
-    req.body.clickable,
-    req.body.date
-  ];
-
-
-  db.query(q, [values], (err, result) => {
-     if (err) return res.json(err);
-     return res.json("Photo has been uploaded succesfully.")
-  });
-});
-
 
 app.post("/cv", uploadCV.single("cv"), (req, res) => {
   console.log(req.file);
@@ -246,43 +194,6 @@ app.delete("/developerprojects/:id", (req, res) => {
     });
   });
 });
-app.delete("/deletePhoto/:id", (req, res) => { 
-  const alt = req.body.alt;
-  const id = req.params.id;
-
-  const q_1 = `SELECT cover1, cover2, cover3, image4, image5, image6, image7, image8, image9 FROM Photography WHERE id = ?`;
-  db.query(q_1, [id], (err, result) => {
-    if (err) return res.json(err);
-    const paths = [
-      result[0].cover1,
-      result[0].cover2,
-      result[0].cover3,
-      result[0].image4,
-      result[0].image5,
-      result[0].image6,
-      result[0].image7,
-      result[0].image8,
-      result[0].image9,
-    ];
-
-    paths.forEach((path, index) => {
-      if (path && alt === path) {
-        fs.unlink(path, (unlinkErr) => {
-          if (unlinkErr) console.log(`Error deleting image file ${index + 1}:`, unlinkErr);
-          else console.log(`Image file ${index + 1} deleted successfully:`, path);
-        });
-      }
-    })
-  });
-
-  const q_2 = `Delete FROM Photography WHERE id = ? AND VALUES (?)`;
-  db.query(q_2, [id, alt], (err, result) => {
-    if (err) return res.json(err);
-    return res.json("Photo has been deleted successfully.");
-  });
-})
-
-// app.delete("/photography/:id", (req, res) => {
 
 ////////////////////////////////////////////////////////////////
 //Upadte in the database.
@@ -381,158 +292,6 @@ app.put(
     });
   }
 );
-
-app.put("/updatePhoto/:id", upload.fields([
-  { name: "cover1" },
-  { name: "cover2" },
-  { name: "cover3" },
-  { name: "image4" },
-  { name: "image5" },
-  { name: "image6" },
-  { name: "image7" },
-  { name: "image8" },
-  { name: "image9" },
-]), (req, res) => {
-
-
-  const id = req.params.id;
-  const values = [ req.body.name, req.body.topic, req.body.clickable, req.body.date];
-
-  const q_1 = `SELECT cover1, cover2, cover3, image4, image5, image6, image7, image8, image9 FROM Photography WHERE id = ?`;
-  db.query(q_1, [id], (err, result) => {
-    if (err) return res.json(err);
-    const cover1Path = result[0].cover1;
-    const cover2Path = result[0].cover2;
-    const cover3Path = result[0].cover3;
-    const image4Path = result[0].image4;
-    const image5Path = result[0].image5;
-    const image6Path = result[0].image6;
-    const image7Path = result[0].image7;
-    const image8Path = result[0].image8;
-    const image9Path = result[0].image9;
-
-
-    if (req.files.cover1) {
-      values.push(req.files.cover1[0].path);
-      if (cover1Path) {
-        fs.unlink(cover1Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image1 file deleted successfully:", cover1Path);
-        });
-      }
-    } else {
-      console.log(cover1Path + " has been added to the values array");
-      values.push(cover1Path);
-    }
-    if (req.files.cover2) {
-      values.push(req.files.cover2[0].path);
-      if (cover2Path) {
-        fs.unlink(cover2Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image2 file deleted successfully:", cover2Path);
-        });
-      }
-    } else {
-      console.log(cover2Path + " has been added to the values array");
-      values.push(cover2Path);
-    }
-    if (req.files.cover3) {
-      values.push(req.files.cover3[0].path);
-      if (cover3Path) {
-        fs.unlink(cover3Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image3 file deleted successfully:", cover3Path);
-        });
-      }
-    } else {
-      console.log(cover3Path + " has been added to the values array");
-      values.push(cover3Path);
-    }
-    if (req.files.image4) {
-      values.push(req.files.image4[0].path);
-      if (image4Path) {
-        fs.unlink(image4Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image4 file deleted successfully:", image4Path);
-        });
-      }
-    } else {
-      console.log(image4Path + " has been added to the values array");
-      values.push(image4Path);
-    }
-    if (req.files.image5) {
-      values.push(req.files.image5[0].path);
-      if (image5Path) {
-        fs.unlink(image5Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image5 file deleted successfully:", image5Path);
-        });
-      }
-    } else {
-      console.log(image5Path + " has been added to the values array");
-      values.push(image5Path);
-    }
-    if (req.files.image6) {
-      values.push(req.files.image6[0].path);
-      if (image6Path) {
-        fs.unlink(image6Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image6 file deleted successfully:", image6Path);
-        });
-      }
-    } else {
-      console.log(image6Path + " has been added to the values array");
-      values.push(image6Path);
-    }
-    if (req.files.image7) {
-      values.push(req.files.image7[0].path);
-      if (image7Path) {
-        fs.unlink(image7Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image7 file deleted successfully:", image7Path);
-        });
-      }
-    } else {
-      console.log(image7Path + " has been added to the values array");
-      values.push(image7Path);
-    }
-    if (req.files.image8) {
-      values.push(req.files.image8[0].path);
-      if (image8Path) {
-        fs.unlink(image8Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image8 file deleted successfully:", image8Path);
-        });
-      }
-    } else {
-      console.log(image8Path + " has been added to the values array");
-      values.push(image8Path);
-    }
-    if (req.files.image9) {
-      values.push(req.files.image9[0].path);
-      if (image9Path) {
-        fs.unlink(image9Path, (unlinkErr) => {
-          if (unlinkErr) console.log("Error deleting image file:", unlinkErr);
-          else console.log("Image9 file deleted successfully:", image9Path);
-        });
-      }
-    } else {
-      console.log(image9Path + " has been added to the values array");
-      values.push(image9Path);
-    }
-
-    console.log(values);
-    const q_2 = "UPDATE Photography SET `name` = ?, `topic` = ?, `cover1` = ?, `cover2` = ?, `cover3` = ?, `image4` = ?, `image5` = ?, `image6` = ?, `image7` = ?, `image8` = ?, `image9` = ?, `clickable` = ?, `date` = ? WHERE (`id` = ?)";
-      const sanitizedValues = values.map((value) =>
-        value === "undefined" ? null : value
-      );
-      db.query(q_2, [...sanitizedValues, id], (err, result) => {
-        if (err) return res.json("Error: " + err);
-        return res.json("Project has been updated successfully.");
-      });
-
-  });
-});
 
 ////////////////////////////////////////////////////////////////
 //Server listening.

@@ -10,19 +10,6 @@ function PhotographyHeader() {
         </p>
       </div>
       <div className="d-flex flex-row gap-1 gap-md-3 col-6 justify-content-end px-2 py-lg-3 px-lg-5">
-        <p className="simple-link d-none d-md-block">
-          <a href="/photography#portraits">Portraits</a>
-        </p>
-        <p className="simple-link d-none d-md-block">
-          <a href="/photography#weddings">Weddings</a>
-        </p>
-        <p className="simple-link d-none d-md-block">
-          <a href="/photography#products">Products</a>
-        </p>
-        <p className="simple-link d-none d-md-block">
-          <a href="/photography#lifestyle">Lifestyle</a>
-        </p> 
-        <p className="d-none d-md-block">/</p>
         <p className="simple-link">
           <Link to="/development">Development</Link>
         </p>
