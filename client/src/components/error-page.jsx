@@ -15,7 +15,7 @@ export default function ErrorPage() {
           <i>{error.data}</i>
         </p>
         <p>
-          <Link to="/">Go back</Link>
+          <Link to="javascript:history.back()">Go back</Link>
         </p>
       </div>
     </div>

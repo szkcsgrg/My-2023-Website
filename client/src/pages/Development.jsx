@@ -125,7 +125,7 @@ function Development() {
       {/* Overview */}
       <section className="section-longer row d-flex flex-column m-0 p-2 m-md-3 p-md-3 mx-lg-5 px-lg-5">
         <div className="d-flex flex-column flex-lg-row gap-3 info">
-          <motion.div
+          <motion.div id="contact"
             initial={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 1.5 }}
             whileInView={{ opacity: 1, x: 0 }}
