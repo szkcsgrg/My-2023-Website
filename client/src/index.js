@@ -8,6 +8,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import '@splidejs/react-splide/css';
+import '@splidejs/react-splide/css/core';
 import "./styles/index.css";
 import { developmentExit } from "../src/components/cursor";
 
@@ -23,6 +25,8 @@ import Development from "./pages/Development";
 import Project from "./pages/components/Project";
 import DeveloperAdd from "./pages/components/DeveloperAdd";
 import DeveloperEdit from "./pages/components/DeveloperEdit";
+import AddPhoto from "./pages/components/PhotoAdd";
+import PhotographyEditDelete from "./pages/components/PhotographyEditDelete";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -80,6 +84,8 @@ const router = createBrowserRouter([
       { path: "/project/:id", element: <Project /> },
       { path: "/addDeveloperProject", element: <DeveloperAdd /> },
       { path: "/updateDeveloperProject/:id", element: <DeveloperEdit /> },
+      { path: "/addPhoto", element: <AddPhoto /> },
+      { path: "/updatePhoto/:id", element: <PhotographyEditDelete /> },
 
       /*
        * IMPORTANT NOTE

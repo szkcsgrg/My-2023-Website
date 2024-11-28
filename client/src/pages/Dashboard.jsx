@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  //`${backendServer}
+
   //Get all the rows from the database.
   const [projects, setProjects] = useState([]);
-
   useEffect(() => {
     //Async fucntion is needed to communicate with the backend.
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}/projectsdevelopment`
+          `${backendServer}/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -26,9 +28,7 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_SERVER}/developerprojects/` + id
-      );
+      await axios.delete(`${backendServer}/developerprojects/` + id);
       window.location.reload();
       //setProjects(projects.filter((project) => project.id !== id));
     } catch (error) {
@@ -43,10 +43,7 @@ function Dashboard() {
       const formData = new FormData();
       formData.append("cv", e.target.files[0]);
 
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_SERVER}/cv`,
-        formData
-      );
+      const response = await axios.post(`${backendServer}/cv`, formData);
       if (response.status === 200) {
         console.log("CV has been successfully uploaded.");
         navigate("/login");
@@ -62,12 +59,47 @@ function Dashboard() {
     }
   };
 
+  //----------------------------------------------------------------//
+
+  const [photos, setPhotos] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("portraits"); // Initial default value
+
+  useEffect(() => {
+    // Async function is needed to communicate with the backend.
+    const fetchPhotosByOption = async () => {
+      try {
+        const res = await axios.get(
+          `${backendServer}/photos/${selectedOption}`
+        );
+        setPhotos(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Call the function initially and whenever the selected option changes.
+    fetchPhotosByOption();
+  }, [selectedOption]);
+
+  // Handle dropdown change
+  const handleDropdownChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+  const handleDeletePhoto = async (id) => {
+    try {
+      await axios.delete(`${backendServer}/photography/` + id);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      <div className="section d-flex justify-content-center flex-column col-12">
+      {/* <div className="section d-flex justify-content-center flex-column col-12">
         <h1>Analitycs</h1>
         <p>Details about the view count interactions etc.</p>
-      </div>
+      </div> */}
       <div className="section d-flex justify-content-center flex-column col-12">
         <h2>Software Development - Section</h2>
 
@@ -127,8 +159,39 @@ function Dashboard() {
           </tbody>
         </table>
       </div>
-      <div className="section d-flex justify-content-center flex-column col-12">
+      <div className="section col-12">
         <h2>Photography - Section</h2>
+        <div className="d-flex gap-3 my-2 mb-4">
+          <button className="col-6 col-lg-2 button">
+            <Link to={"/addPhoto"}>Add New Photo</Link>
+          </button>
+          <select
+            name="options"
+            id="dropdown"
+            value={selectedOption}
+            onChange={handleDropdownChange}
+          >
+            <option value="portraits">Portraits</option>
+            <option value="weddings">Weddings</option>
+            <option value="products">Products</option>
+            <option value="lifestyle">Lifestyle</option>
+          </select>
+        </div>
+
+        <div className="dashboard-gallery text-center">
+          {photos.map((photo) => (
+            <div
+              onClick={() => navigate(`/updatePhoto/${photo.id}`)}
+              key={photo.id}
+            >
+              <img className="dashboard-img"
+                loading="lazy"
+                src={`${backendServer}/${photo.cover1}`}
+                alt={photo.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
