@@ -1,17 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Autoplay,
-  Pagination,
-  Navigation,
-  EffectFade,
-  Scrollbar,
-  A11y,
-  FreeMode,
-  Zoom,
-} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -19,7 +8,7 @@ import "swiper/css/effect-fade";
 import { Link } from "react-router-dom";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
+// import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 // import "@splidejs/splide/dist/css/splide.min.css";
 
 function Photography() {
@@ -50,7 +39,20 @@ function Photography() {
         const res = await axios.get(
           `${process.env.REACT_APP_BACKEND_SERVER}/portraits`
         );
-        setPortraits(res.data);
+        // console.log(res.data);
+
+        const sortedData = res.data.sort((a, b) => {
+          const [dayA, monthA, yearA] = a.date.split('.').map(Number);
+          const [dayB, monthB, yearB] = b.date.split('.').map(Number);
+    
+          const dateA = new Date(yearA, monthA - 1, dayA); // Months are 0-indexed
+          const dateB = new Date(yearB, monthB - 1, dayB);
+    
+          return dateB - dateA; // Sort in descending order
+        });
+
+        // console.log(sortedData);
+        setPortraits(sortedData);
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +63,18 @@ function Photography() {
         const res = await axios.get(
           `${process.env.REACT_APP_BACKEND_SERVER}/weddings`
         );
-        setWeddings(res.data);
+
+        const sortedData = res.data.sort((a, b) => {
+          const [dayA, monthA, yearA] = a.date.split('.').map(Number);
+          const [dayB, monthB, yearB] = b.date.split('.').map(Number);
+    
+          const dateA = new Date(yearA, monthA - 1, dayA); // Months are 0-indexed
+          const dateB = new Date(yearB, monthB - 1, dayB);
+    
+          return dateB - dateA; // Sort in descending order
+        });
+
+        setWeddings(sortedData);
       } catch (error) {
         console.log(error);
       }
@@ -72,7 +85,16 @@ function Photography() {
         const res = await axios.get(
           `${process.env.REACT_APP_BACKEND_SERVER}/products`
         );
-        setProducts(res.data);
+        const sortedData = res.data.sort((a, b) => {
+          const [dayA, monthA, yearA] = a.date.split('.').map(Number);
+          const [dayB, monthB, yearB] = b.date.split('.').map(Number);
+    
+          const dateA = new Date(yearA, monthA - 1, dayA); // Months are 0-indexed
+          const dateB = new Date(yearB, monthB - 1, dayB);
+    
+          return dateB - dateA; // Sort in descending order
+        });
+        setProducts(sortedData);
       } catch (error) {
         console.log(error);
       }
@@ -83,7 +105,16 @@ function Photography() {
         const res = await axios.get(
           `${process.env.REACT_APP_BACKEND_SERVER}/lifestyle`
         );
-        setLifestyle(res.data);
+        const sortedData = res.data.sort((a, b) => {
+          const [dayA, monthA, yearA] = a.date.split('.').map(Number);
+          const [dayB, monthB, yearB] = b.date.split('.').map(Number);
+    
+          const dateA = new Date(yearA, monthA - 1, dayA); // Months are 0-indexed
+          const dateB = new Date(yearB, monthB - 1, dayB);
+    
+          return dateB - dateA; // Sort in descending order
+        });
+        setLifestyle(sortedData);
       } catch (error) {
         console.log(error);
       }

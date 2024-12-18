@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function PhotoAdd() {
-  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
-  //`${backendServer}
-
+function DeveloperAdd() {
   //Check if there is any User
   const [user, setUser] = useState();
   useEffect(() => {
@@ -16,122 +13,100 @@ function PhotoAdd() {
 
   //Add new element to the DB.
   const navigate = useNavigate();
-  const [clickable, setClickable] = useState(false);
-  const [photoTitle, setPhotoTitle] = useState();
-  const [photoTopic, setTopic] = useState();
-  const [photoDate, setDate] = useState();
-  const [cover1, setCover1] = useState();
-  const [cover2, setCover2] = useState();
-  const [cover3, setCover3] = useState();
+  const [projects, setProjects] = useState();
+
+  const formatDateToDDMMYYYY = (dateString) => {
+    const [year, month, day] = dateString.split("-");
+    return `${day}.${month}.${year}`;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // If the field is a date, format it as "dd.mm.yyyy"
+    if (name === "dateStart" || name === "dateEnd") {
+      const formattedDate = formatDateToDDMMYYYY(value);
+      setProjects((prev) => ({ ...prev, [name]: formattedDate }));
+    } else {
+      setProjects((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const [image1, setImage1] = useState();
+  const [image2, setImage2] = useState();
+  const [image3, setImage3] = useState();
   const [image4, setImage4] = useState();
-  const [image5, setImage5] = useState();
-  const [image6, setImage6] = useState();
-  const [image7, setImage7] = useState();
-  const [image8, setImage8] = useState();
-  const [image9, setImage9] = useState();
 
-  const handleClickable = (e) => {
-    const { clickable } = e.target;
-    setClickable(clickable === false ? true : false);
+  const handleImage1 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage1(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image1: URL.createObjectURL(selectedFile),
+    }));
   };
-  const handleTitleChange = (e) => {
-    setPhotoTitle(e.target.value);
+  const handleImage2 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage2(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image2: URL.createObjectURL(selectedFile),
+    }));
   };
-  const handleTopicChange = (e) => {
-    setTopic(e.target.value);
+  const handleImage3 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage3(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image3: URL.createObjectURL(selectedFile),
+    }));
   };
-  const handleDateChange = (e) => {
-    setDate(e.target.value);
+  const handleImage4 = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage4(selectedFile);
+    setProjects((prev) => ({
+      ...prev,
+      image4: URL.createObjectURL(selectedFile),
+    }));
   };
-
-    
-
-    const handleCover1 = (e) => {
-        setCover1(e.target.files[0]);
-    };
-    const handleCover2 = (e) => {
-        setCover2(e.target.files[0]);
-    };
-    const handleCover3 = (e) => {
-        setCover3(e.target.files[0]);
-    };
-    const handleImage4 = (e) => {
-        setImage4(e.target.files[0]);
-    };
-    const handleImage5 = (e) => {
-        setImage5(e.target.files[0]);
-    };
-    const handleImage6 = (e) => {
-        setImage6(e.target.files[0]);
-    };
-    const handleImage7 = (e) => {
-        setImage7(e.target.files[0]);
-    };
-    const handleImage8 = (e) => {
-        setImage8(e.target.files[0]);
-    };
-    const handleImage9 = (e) => {
-        setImage9(e.target.files[0]);
-    };
-
-
-
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if(!photoTopic){
-      alert("Please select a topic.");
-    }else{
-      try {
-        console.log("/////////////////////////////////////////")
-        console.log(photoTitle)
-        console.log(photoTopic)
-        console.log(cover1)
-        console.log(cover2)
-        console.log(cover3)
-        console.log(image4)
-        console.log(image5)
-        console.log(image6)
-        console.log(image7)
-        console.log(image8)
-        console.log(image9)
-        console.log(clickable)
-        console.log(photoDate);
-        console.log("/////////////////////////////////////////")
+    try {
+      const formData = new FormData();
+      formData.append("name", projects.name);
+      formData.append("dateStart", projects.dateStart);
+      formData.append("stack", projects.stack);
+      formData.append("description1", projects.description1);
+      formData.append("description2", projects.description2);
+      formData.append("colorCode", projects.colorCode);
+      formData.append("href1", projects.href1);
+      formData.append("href2", projects.href2);
+      formData.append("developmentType", projects.developmentType);
+      formData.append("position", projects.position);
+      formData.append("dateEnd", projects.dateEnd);
+      formData.append("reviewWriter", projects.reviewWriter);
+      formData.append("reviewText", projects.reviewText);
+      formData.append("image1", image1);
+      formData.append("image2", image2);
+      formData.append("image3", image3);
+      formData.append("image4", image4);
 
-        const formData = new FormData();
-        formData.append("name", photoTitle);
-        formData.append("topic", photoTopic);
-        formData.append("cover1", cover1);
-        formData.append("cover2", cover2);
-        formData.append("cover3", cover3);
-        formData.append("image4", image4);
-        formData.append("image5", image5);
-        formData.append("image6", image6);
-        formData.append("image7", image7);
-        formData.append("image8", image8);
-        formData.append("image9", image9);
-        formData.append("clickable", clickable);
-        formData.append("date", photoDate);
-        console.log(formData);
-        
-
-        const response = await axios.post(
-          `${backendServer}/addPhoto`,
-          formData
-        );
-        if (response.status === 200) {
-          console.log("Photo has been successfully uploaded.");
-          navigate("/login");
-        } else {
-          console.error("Pohoto upload failed.");
-        }
-      } catch (error) {
-        if (error.response && error.response.data) {
-          console.log(error.response.data);
-        } else {
-          console.log("Error: ", error);
-        }
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_SERVER}/developerprojects`,
+        formData
+      );
+      if (response.status === 200) {
+        console.log("Project has been created successfully.");
+        navigate("/login");
+      } else {
+        console.error("Project creation failed.");
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.log(error.response.data);
+      } else {
+        console.log("Error: ", error);
       }
     }
   };
@@ -150,128 +125,161 @@ function PhotoAdd() {
         </div>
       ) : user === admin ? (
         <div className="d-flex flex-column justify-content-center m-0 p-0 m-md-3 p-md-3 m-lg-5 p-lg-5 text-center">
-          <h3 className="my-5">Upload New Photo</h3>
-          <div className="col-12 d-flex flex-row justify-content-center text-center">
-            <form
-              action="post"
-              className="d-flex flex-column col-6 justify-content-center text-center gap-2"
-            >
-              <input type="checkbox" name="clickable" id="" default="false" onChange={handleClickable} />
+          <h3 className="my-5">Add new project</h3>
+          <form action="post" className="row">
+            <div className="col-10 col-lg-6 d-flex flex-column gap-2">
               <input
                 type="text"
-                onChange={handleTitleChange}
+                onChange={handleChange}
                 name="name"
                 placeholder="Title"
               />
-              <input type="text"
-                onChange={handleDateChange}
-                name="date"
-                placeholder="12.03.2003"
+              <div>
+                <input type="date" onChange={handleChange} name="dateStart" />{" "}
+                <input type="date" onChange={handleChange} name="dateEnd" />{" "}
+              </div>
+              <input
+                type="text"
+                onChange={handleChange}
+                name="stack"
+                placeholder="Stack"
               />
-              <select name="topic" id="" onChange={handleTopicChange}>
-                <option default>Change</option>
-                <option value="portraits">Portraits</option>
-                <option value="weddings">Weddings</option>
-                <option value="products">Products</option>
-                <option value="lifestyle">Lifestyle</option>
-              </select>
-              <div>
-                <label htmlFor="cover1" className="mx-2">Cover 1.:</label>
+              <input
+                type="text"
+                onChange={handleChange}
+                name="developmentType"
+                placeholder="Development Type Eg: Freelance, Personal Project"
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                name="position"
+                placeholder="Position on Page Eg: 1-2-3-4-..."
+              />
+              <input
+                type="text"
+                onChange={handleChange}
+                name="colorCode"
+                placeholder="Color Code Eg: #1378h3"
+              />
+              <input
+                type="href"
+                onChange={handleChange}
+                name="href1"
+                placeholder="Github URL"
+              />
+              <input
+                type="href"
+                onChange={handleChange}
+                name="href2"
+                placeholder="Real URL"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage1}
+                name="image1"
+                placeholder="Image 1"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage2}
+                name="image2"
+                placeholder="Image 2"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage3}
+                name="image3"
+                placeholder="Image 3"
+              />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImage4}
+                name="image4"
+                placeholder="Image 4"
+              />
+            </div>
+            <div className="col-10 col-lg-6">
+              <textarea
+                name="description1"
+                onChange={handleChange}
+                id="description1"
+                cols="75"
+                rows="7"
+                placeholder="Short Overview"
+              ></textarea>
+              <textarea
+                name="description2"
+                onChange={handleChange}
+                id="description2"
+                cols="75"
+                rows="7"
+                placeholder="Project Process"
+              ></textarea>
+            </div>
+            <div className="col-10 col-lg-12 d-flex flex-column align-items-center my-5">
+              <div className="col-6 d-flex flex-column">
                 <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleCover1}
-                    name="cover1"
-                    placeholder="Image"
-                    />
+                  type="text"
+                  onChange={handleChange}
+                  name="reviewWriter"
+                  placeholder="Review Writer"
+                />
+                <textarea
+                  onChange={handleChange}
+                  name="reviewText"
+                  cols="35"
+                  rows="7"
+                  placeholder="Review Text"
+                ></textarea>
               </div>
-              <div>
-                <label htmlFor="cover2" className="mx-2">Cover 2.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleCover2}
-                    name="cover2"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="cover3" className="mx-2">Cover 3.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleCover3}
-                    name="cover3"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image4" className="mx-2">Image 4.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage4}
-                    name="image3"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image5" className="mx-2">Image 5.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage5}
-                    name="image5"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image6" className="mx-2">Image 6.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage6}
-                    name="image6"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image7" className="mx-2">Image 7.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage7}
-                    name="image7"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image8" className="mx-2">Image 8.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage8}
-                    name="image8"
-                    placeholder="Image"
-                    />
-              </div>
-              <div>
-                <label htmlFor="image9" className="mx-2">Image 9.:</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImage9}
-                    name="image9"
-                    placeholder="Image"
-                    />
-              </div>
-              <button
-                className="col-2 my-2 justify-content-center"
-                onClick={handleClick}
-              >
+              <button className="col-2 my-4" onClick={handleClick}>
                 Save
               </button>
-            </form>
+            </div>
+          </form>
+          <div className="col-6">
+            <h3>Sample</h3>
+            <p>
+              <h4>Project Overview:</h4>
+              <ul>
+                <li>
+                  Brief Project Description: A concise summary of the project,
+                  highlighting its purpose and context.
+                </li>
+                <li>
+                  Project Goals and Objectives: Clear objectives and goals the
+                  project aimed to achieve, aligning with the client's needs or
+                  business objectives.
+                </li>
+                <li>
+                  Technologies Used: Mention the key technologies, frameworks,
+                  or tools utilized in the project's development.
+                </li>
+              </ul>
+              <h4>Development Journey:</h4>
+              <ul>
+                <li>
+                  Planning and Setup: Detail the initial planning phase,
+                  including project setup, technology selection, and defining
+                  the roadmap.
+                </li>
+                <li>
+                  Design and Iterations: Discuss the design process, including
+                  iterations and refinements based on feedback and project
+                  goals.
+                </li>
+                <li>
+                  Development, Testing, and Deployment: Describe the development
+                  process, testing procedures, and deployment strategy,
+                  highlighting key steps and considerations.
+                </li>
+              </ul>
+            </p>
           </div>
         </div>
       ) : (
@@ -290,4 +298,4 @@ function PhotoAdd() {
   );
 }
 
-export default PhotoAdd;
+export default DeveloperAdd;
