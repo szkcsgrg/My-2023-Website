@@ -662,6 +662,95 @@ textarea {
   fill: #d7942d;
 }
 
+.photography-client-header {
+  height: 40svh;
+}
+
+.photography-client-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  grid-auto-rows: 0.75em;
+  gap: 0.75em;
+}
+@media (max-width: 600px) {
+  .photography-client-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5em;
+  }
+}
+
+.img-container-photography-client {
+  -moz-column-break-inside: avoid;
+       break-inside: avoid;
+  overflow: hidden;
+}
+
+.img-container-photography-client img {
+  width: 100%;
+  cursor: pointer;
+  height: auto;
+  display: block;
+  transition: all 1s ease-in-out;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.arrow {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+
+.arrow.left {
+  left: 15px;
+}
+
+.arrow.right {
+  right: 15px;
+}
+
 .cursor {
   transition-duration: 0.2s;
   transition-timing-function: ease-out;

@@ -27,6 +27,8 @@ import DeveloperAdd from "./pages/components/DeveloperAdd";
 import DeveloperEdit from "./pages/components/DeveloperEdit";
 import AddPhoto from "./pages/components/PhotoAdd";
 import PhotographyEditDelete from "./pages/components/PhotographyEditDelete";
+import PhotographyClient from "./pages/components/PhotographyClient";
+import AlternativeClient from "./pages/components/AlternativeClient";
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -86,6 +88,8 @@ const router = createBrowserRouter([
       { path: "/updateDeveloperProject/:id", element: <DeveloperEdit /> },
       { path: "/addPhoto", element: <AddPhoto /> },
       { path: "/updatePhoto/:id", element: <PhotographyEditDelete /> },
+      // { path: "/client", element: <PhotographyClient /> },
+      {path: "/client", element: <AlternativeClient />},
 
       /*
        * IMPORTANT NOTE
