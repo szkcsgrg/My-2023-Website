@@ -296,7 +296,7 @@ function Development() {
               </h2>
             </motion.div>
 
-            {projects.map((project) => (
+            {projects.map((project, index) => (
               <Link
                 key={project.id}
                 to={`/project/${project.id}`}
@@ -346,9 +346,9 @@ function Development() {
                     className="col-12 col-md-5 d-flex justify-content-center justify-content-md-end px-3"
                   >
                     <img
-                      loading="lazy"
+                      {...(index > 0 ? { loading: "lazy" } : {})}
                       className="img-thumbnail border-0 project-thumbnail"
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${project.image1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${project.image1.replace('_medium.webp', '_thumb.webp')}`}
                       alt="Thumbnail of the project"
                     />
                   </motion.div>

@@ -200,14 +200,13 @@ function Photography() {
                   </div>
                   <div className="col-md-12 d-lg-none">
                     {(portrait.cover1 !== null) && (
-                      <motion.img 
-                      loading="lazy"
+                      <motion.img
                       initial={{ opacity: 0, x: -90 }}
                       transition={{ duration: 1 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={portrait.name}
                       className="photo-card-img card-img-smaller-lg"
                       />
@@ -220,39 +219,36 @@ function Photography() {
                 <div className="ms-0 ms-lg-5 col-6 col-md-5 col-lg-6 d-flex flex-column flex-lg-row gap-2 gap-md-1 gap-lg-2 gap-xl-4 align-items-center justify-content-center me-5 pe-5">
                     {(portrait.cover1 !== null) && (
                       <motion.img
-                      loading="lazy"
                       initial={{ opacity: 0, y: -100 }}
                       whileInView={{ opacity: 1, y: 0, x: 0 }}
                       transition={{ duration: 0.5 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={portrait.name}
                       className="photo-card-img card-img-smaller-lg d-none d-lg-block"
                       />
                     )}
                   {(portrait.cover2 !== null) && (
                     <motion.img
-                    loading="lazy"
                     initial={{ opacity: 0, y: 100 }}
                     transition={{ duration: 1 }}
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover2}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover2.replace('_medium.webp', '_thumb.webp')}`}
                     alt={portrait.name}
                     className="photo-card-img"
                     />
                   )}
                   {(portrait.cover3 !== null) && (
                     <motion.img
-                    loading="lazy"
                     initial={{ opacity: 0, y: -100 }}
                     transition={{ duration: 1.5 }}
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover3}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${portrait.cover3.replace('_medium.webp', '_thumb.webp')}`}
                     alt={portrait.name}
                     className="photo-card-img card-img-smaller-lg"
                     />
@@ -317,7 +313,7 @@ function Photography() {
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={wedding.name}
                       className="photo-card-img card-img-smaller-lg"
                       />
@@ -336,7 +332,7 @@ function Photography() {
                       transition={{ duration: 0.5 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={wedding.name}
                       className="photo-card-img card-img-smaller-lg d-none d-lg-block"
                       />
@@ -349,7 +345,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover2}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover2.replace('_medium.webp', '_thumb.webp')}`}
                     alt={wedding.name}
                     className="photo-card-img"
                     />
@@ -362,7 +358,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover3}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${wedding.cover3.replace('_medium.webp', '_thumb.webp')}`}
                     alt={wedding.name}
                     className="photo-card-img card-img-smaller-lg"
                     />
@@ -427,7 +423,7 @@ function Photography() {
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={product.name}
                       className="photo-card-img card-img-smaller-lg"
                       />
@@ -446,7 +442,7 @@ function Photography() {
                       transition={{ duration: 0.5 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={product.name}
                       className="photo-card-img card-img-smaller-lg d-none d-lg-block"
                       />
@@ -459,7 +455,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover2}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover2.replace('_medium.webp', '_thumb.webp')}`}
                     alt={product.name}
                     className="photo-card-img"
                     />
@@ -472,7 +468,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover3}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${product.cover3.replace('_medium.webp', '_thumb.webp')}`}
                     alt={product.name}
                     className="photo-card-img card-img-smaller-lg"
                     />
@@ -537,7 +533,7 @@ function Photography() {
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={life.name}
                       className="photo-card-img card-img-smaller-lg"
                       />
@@ -556,7 +552,7 @@ function Photography() {
                       transition={{ duration: 0.5 }}
                       whileFocus={{ scale: 1.2, zIndex: 1000 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
-                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover1}`}
+                      src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover1.replace('_medium.webp', '_thumb.webp')}`}
                       alt={life.name}
                       className="photo-card-img card-img-smaller-lg d-none d-lg-block"
                       />
@@ -569,7 +565,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover2}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover2.replace('_medium.webp', '_thumb.webp')}`}
                     alt={life.name}
                     className="photo-card-img"
                     />
@@ -582,7 +578,7 @@ function Photography() {
                     whileHover={{ scale: 1.2, zIndex: 1000 }}
                     whileFocus={{ scale: 1.2, zIndex: 1000 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover3}`}
+                    src={`${process.env.REACT_APP_BACKEND_SERVER}/${life.cover3.replace('_medium.webp', '_thumb.webp')}`}
                     alt={life.name}
                     className="photo-card-img card-img-smaller-lg"
                     />
