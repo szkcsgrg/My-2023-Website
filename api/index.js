@@ -73,7 +73,15 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-
+// Block direct browser access — only allow requests with a valid Origin header
+app.use((req, res, next) => {
+  if (req.path === '/' || req.path.startsWith('/public/') || req.method === 'OPTIONS') return next();
+  const origin = req.headers.origin;
+  if (!origin || !allowedOrigins.includes(origin)) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  next();
+});
 
 
 //File handeling
