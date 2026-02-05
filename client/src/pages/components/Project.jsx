@@ -33,8 +33,11 @@ function Project() {
       </span>
     );
   }
+  const parallaxImage = project.image2?.endsWith('_medium.webp')
+    ? project.image2.replace('_medium.webp', '_full.webp')
+    : project.image2;
   const parallax1 = {
-    backgroundImage: `url("${backendServer}/${project.image2}")`,
+    backgroundImage: `url("${backendServer}/${parallaxImage}")`,
   };
 
   const MarkdownWithCustomStyles = ({ markdownContent, colorCode }) => {
@@ -135,6 +138,7 @@ function Project() {
       <section className="section row m-0 p-2 py-3 m-md-3 p-md-3 m-lg-3 p-lg-3 d-flex justify-content-center text-center">
         <div className="col-10 col-md-6 text-center">
           <img
+            loading="lazy"
             className="rep-image text-center"
             alt="UI element"
             src={`${backendServer}/${project.image3}`}
@@ -142,6 +146,7 @@ function Project() {
         </div>
         <div className="col-10 col-md-6 mt-lg-5 mt-0 text-center">
           <img
+            loading="lazy"
             alt="UI element"
             className="rep-image text-center"
             src={`${backendServer}/${project.image4}`}

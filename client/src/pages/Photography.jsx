@@ -310,8 +310,8 @@ function Photography() {
                   </div>
                   <div className="col-md-12 d-lg-none">
                     {(wedding.cover1 !== null) && (
-                      <motion.img 
-                      
+                      <motion.img
+                      loading="lazy"
                       initial={{ opacity: 0, x: -90 }}
                       transition={{ duration: 1 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
@@ -420,8 +420,8 @@ function Photography() {
                   </div>
                   <div className="col-md-12 d-lg-none">
                     {(product.cover1 !== null) && (
-                      <motion.img 
-                      
+                      <motion.img
+                      loading="lazy"
                       initial={{ opacity: 0, x: -90 }}
                       transition={{ duration: 1 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}
@@ -530,8 +530,8 @@ function Photography() {
                   </div>
                   <div className="col-md-12 d-lg-none">
                     {(life.cover1 !== null) && (
-                      <motion.img 
-                      
+                      <motion.img
+                      loading="lazy"
                       initial={{ opacity: 0, x: -90 }}
                       transition={{ duration: 1 }}
                       whileHover={{ scale: 1.2, zIndex: 1000 }}

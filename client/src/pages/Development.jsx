@@ -346,6 +346,7 @@ function Development() {
                     className="col-12 col-md-5 d-flex justify-content-center justify-content-md-end px-3"
                   >
                     <img
+                      loading="lazy"
                       className="img-thumbnail border-0 project-thumbnail"
                       src={`${process.env.REACT_APP_BACKEND_SERVER}/${project.image1}`}
                       alt="Thumbnail of the project"
