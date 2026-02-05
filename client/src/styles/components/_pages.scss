@@ -50,12 +50,11 @@
 .section-shorter {
   background-color: colors.$main;
   color: colors.$secondary;
-  min-height: calc(100% + 60svw + 60svh);
   height: auto;
   padding-top: 1em;
   padding-bottom: 1em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 10em;
+  margin-bottom: 10em;
   position: relative;
 }
 .project {

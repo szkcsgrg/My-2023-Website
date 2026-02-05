@@ -12,7 +12,7 @@ function Dashboard() {
     const fecthAllProjects = async () => {
       try {
         const res = await axios.get(
-          `${process.env.REACT_APP_BACKEND_SERVER}:8800/projectsdevelopment`
+          `${process.env.REACT_APP_BACKEND_SERVER}/projectsdevelopment`
         );
         setProjects(res.data);
       } catch (error) {
@@ -27,7 +27,7 @@ function Dashboard() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(
-        `${process.env.REACT_APP_BACKEND_SERVER}:8800/developerprojects/` + id
+        `${process.env.REACT_APP_BACKEND_SERVER}/developerprojects/` + id
       );
       window.location.reload();
       //setProjects(projects.filter((project) => project.id !== id));
@@ -44,7 +44,7 @@ function Dashboard() {
       formData.append("cv", e.target.files[0]);
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_SERVER}:8800/cv`,
+        `${process.env.REACT_APP_BACKEND_SERVER}/cv`,
         formData
       );
       if (response.status === 200) {
