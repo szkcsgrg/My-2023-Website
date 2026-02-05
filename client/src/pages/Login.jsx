@@ -14,7 +14,6 @@ function Login() {
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result);
       setUserName(result.user.displayName);
       setUserEmail(result.user.email);
     } catch (error) {
@@ -24,7 +23,6 @@ function Login() {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(userEmail));
-    console.log(localStorage);
   }, [userName, userEmail]);
 
   return (

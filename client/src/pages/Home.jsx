@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 import profile from "../assets/utils/Profile.png";
 
 function Home() {
-  const CV = `${process.env.REACT_APP_BACKEND_SERVER}/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
+  const backendServer = process.env.REACT_APP_BACKEND_SERVER;
+  const CV = `${backendServer}/public/cv/Gergo%20Szakacs%20-%20CV.pdf`;
 
   return (
-    <article className="background">
+    <article>
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="landing d-flex justify-content-center align-items-center flex-column flex-lg-row-reverse m-1 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
+        className="landing d-flex justify-content-center align-items-center flex-column flex-lg-row-reverse m-1 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5 h-100"
       >
         <motion.div
           initial={{ opacity: 0 }}
@@ -39,19 +40,23 @@ function Home() {
             or <Link to="tel:+43 676 950 8332">+43 676 950 8332</Link>. <br />
             For a comprehensive look, feel free to access my{" "}
             <a target="_blank" rel="noreferrer" href={CV}>
-              CV
+              Resume
             </a>{" "}
             for more details.
           </p>
         </motion.div>
       </motion.section>
-      <motion.section
+      {/* <motion.section
         initial={{ opacity: 0, x: "-100%" }}
         transition={{ duration: 2.5 }}
         whileInView={{ opacity: 1, x: 0 }}
         className="section row d-flex flex-row flex-md-column m-0 p-2 m-md-3 p-md-3 m-lg-5 p-lg-5"
       >
-        <Link to="/development">
+        <Link
+          to="/development"
+          // onMouseEnter={developmentEnter}
+          // onMouseLeave={developmentExit}
+        >
           <h2 className="z-1 m-0">Software Development</h2>
           <h2 className="d-none d-lg-block z-0">
             <span>Software Development</span>
@@ -93,7 +98,7 @@ function Home() {
           objects or people, I love to take a digital version of the moment.
           Street photography and nature puts me in my comfort zone.
         </p>
-      </motion.section>
+      </motion.section> */}
     </article>
   );
 }
